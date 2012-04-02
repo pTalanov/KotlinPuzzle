@@ -33,8 +33,11 @@ class Bundle(val mainPiece : Piece) : Shape() {
 
     fun mergeNeighbours(piece : Piece) {
         for (neighbour in piece.neighbours()) {
+            if (neighbour == null) {
+                continue
+            }
             val alignDelta = piece.alignDelta(neighbour)
-            if (alignDelta.sqr < 30.0) {
+            if (alignDelta.sqr < 60.0) {
                 if (neighbour.bundle != this) {
                     merge(neighbour.bundle, alignDelta)
                 }
@@ -44,7 +47,8 @@ class Bundle(val mainPiece : Piece) : Shape() {
 
     override fun draw(state : CanvasState) {
         for (piece in pieces) {
-            piece.draw(state)
+            piece.drawImagePart(state)
+            piece.drawBorders(state)
         }
     }
 

@@ -7,7 +7,7 @@ import kotlin.ranges.shuffled
 
 object Image {
     val data : HTMLImageElement
-    get() = getImage("Chrysanthemum.jpg")
+    get() = getImage("Penguins.jpg")
     val width = 1024
     val height = 768
     val piecesX = 8

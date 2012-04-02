@@ -167,53 +167,13 @@ var classes = function(){
     }
   }
   });
-  var tmp$1 = Kotlin.Class.create({initialize:function(){
-    this.$selected_0 = false;
-  }
-  , draw:function(state){
-  }
-  , contains:function(mousePos){
-  }
-  , get_pos:function(){
-    return this.$pos_0;
-  }
-  , set_pos:function(tmp$0){
-    this.$pos_0 = tmp$0;
-  }
-  , get_selected:function(){
-    return this.$selected_0;
-  }
-  , set_selected:function(tmp$0){
-    this.$selected_0 = tmp$0;
-  }
-  , shadowed:function(receiver, shadowOffset, alpha, render){
-    {
-      receiver.save();
-      receiver.shadowColor = 'rgba(100, 100, 100, ' + alpha + ')';
-      receiver.shadowBlur = 5;
-      receiver.shadowOffsetX = shadowOffset.get_x();
-      receiver.shadowOffsetY = shadowOffset.get_y();
-      render.call(receiver);
-      receiver.restore();
-    }
-  }
-  , fillPath:function(receiver, constructPath){
-    {
-      receiver.beginPath();
-      constructPath.call(receiver);
-      receiver.closePath();
-      receiver.fill();
-    }
-  }
-  });
-  var tmp$2 = Kotlin.Class.create(tmp$1, {initialize:function(i, j, startingPos, imageX, imageY, width, height){
+  var tmp$1 = Kotlin.Class.create({initialize:function(i, j, startingPos, imageX, imageY, width, height){
     this.$i = i;
     this.$j = j;
     this.$imageX = imageX;
     this.$imageY = imageY;
     this.$width = width;
     this.$height = height;
-    this.super_init();
     this.$pos = startingPos;
     this.$bundle = new example.Bundle(this);
   }
@@ -247,34 +207,77 @@ var classes = function(){
   , set_bundle:function(tmp$0){
     this.$bundle = tmp$0;
   }
+  , get_leftNeighbour:function(){
+    var tmp$0;
+    if (this.get_i() > 0)
+      tmp$0 = example.get_Image().get_pieces()[this.get_i() - 1][this.get_j()];
+    else 
+      tmp$0 = null;
+    {
+      return tmp$0;
+    }
+  }
+  , get_rightNeighbour:function(){
+    var tmp$0;
+    if (this.get_i() < example.get_Image().get_piecesX() - 2)
+      tmp$0 = example.get_Image().get_pieces()[this.get_i() + 1][this.get_j()];
+    else 
+      tmp$0 = null;
+    {
+      return tmp$0;
+    }
+  }
+  , get_topNeighbour:function(){
+    var tmp$0;
+    if (this.get_j() > 0)
+      tmp$0 = example.get_Image().get_pieces()[this.get_i()][this.get_j() - 1];
+    else 
+      tmp$0 = null;
+    {
+      return tmp$0;
+    }
+  }
+  , get_bottomNeighbour:function(){
+    var tmp$0;
+    if (this.get_j() < example.get_Image().get_piecesY() - 2)
+      tmp$0 = example.get_Image().get_pieces()[this.get_i()][this.get_j() + 1];
+    else 
+      tmp$0 = null;
+    {
+      return tmp$0;
+    }
+  }
   , contains:function(mousePos){
     {
       return mousePos.isInRect(this.get_pos(), example.v$0(this.get_width(), this.get_height()));
-    }
-  }
-  , draw:function(state){
-    {
-      this.drawImagePart(state);
-      this.drawBorders(state);
     }
   }
   , drawBorders:function(state){
     {
       var context = state.get_context();
       context.strokeStyle = '#000000';
-      context.lineWidth = 2;
-      context.strokeRect(Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()), this.get_width(), this.get_height());
+      context.lineWidth = 4;
+      var tmp$0;
+      if ((tmp$0 = this.get_leftNeighbour() , tmp$0 != null?tmp$0.get_bundle():null) != this.get_bundle()) {
+        util.strokeLine(context, Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()), Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()) + this.get_height());
+      }
+      var tmp$1;
+      if ((tmp$1 = this.get_rightNeighbour() , tmp$1 != null?tmp$1.get_bundle():null) != this.get_bundle()) {
+        util.strokeLine(context, Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()), Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()) + this.get_height());
+      }
+      var tmp$2;
+      if ((tmp$2 = this.get_bottomNeighbour() , tmp$2 != null?tmp$2.get_bundle():null) != this.get_bundle()) {
+        util.strokeLine(context, Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()) + this.get_height(), Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()) + this.get_height());
+      }
+      var tmp$3;
+      if ((tmp$3 = this.get_topNeighbour() , tmp$3 != null?tmp$3.get_bundle():null) != this.get_bundle()) {
+        util.strokeLine(context, Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()), Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()));
+      }
     }
   }
   , drawImagePart:function(state){
     {
-      var tmp$0;
-      this.shadowed(state.get_context(), example.v$0(1, 1), 0.8, (tmp$0 = this , function(){
-        {
-          this.drawImage(example.get_Image().get_data(), tmp$0.get_imageX(), tmp$0.get_imageY(), tmp$0.get_width(), tmp$0.get_height(), Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()), tmp$0.get_width(), tmp$0.get_height());
-        }
-      }
-      ));
+      state.get_context().drawImage(example.get_Image().get_data(), this.get_imageX(), this.get_imageY(), this.get_width(), this.get_height(), Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()), this.get_width(), this.get_height());
     }
   }
   , get_indexVector:function(){
@@ -285,18 +288,10 @@ var classes = function(){
   , neighbours:function(){
     {
       var result = new Kotlin.ArrayList;
-      if (this.get_i() > 0) {
-        result.add(example.get_Image().get_pieces()[this.get_i() - 1][this.get_j()]);
-      }
-      if (this.get_j() > 0) {
-        result.add(example.get_Image().get_pieces()[this.get_i()][this.get_j() - 1]);
-      }
-      if (this.get_i() < example.get_Image().get_piecesX() - 2) {
-        result.add(example.get_Image().get_pieces()[this.get_i() + 1][this.get_j()]);
-      }
-      if (this.get_j() < example.get_Image().get_piecesY() - 2) {
-        result.add(example.get_Image().get_pieces()[this.get_i()][this.get_j() + 1]);
-      }
+      result.add(this.get_leftNeighbour());
+      result.add(this.get_topNeighbour());
+      result.add(this.get_bottomNeighbour());
+      result.add(this.get_rightNeighbour());
       return result;
     }
   }
@@ -308,7 +303,27 @@ var classes = function(){
     }
   }
   });
-  var tmp$3 = Kotlin.Class.create(tmp$1, {initialize:function(mainPiece){
+  var tmp$2 = Kotlin.Class.create({initialize:function(){
+    this.$selected_0 = false;
+  }
+  , draw:function(state){
+  }
+  , contains:function(mousePos){
+  }
+  , get_pos:function(){
+    return this.$pos;
+  }
+  , set_pos:function(tmp$0){
+    this.$pos = tmp$0;
+  }
+  , get_selected:function(){
+    return this.$selected_0;
+  }
+  , set_selected:function(tmp$0){
+    this.$selected_0 = tmp$0;
+  }
+  });
+  var tmp$3 = Kotlin.Class.create(tmp$2, {initialize:function(mainPiece){
     this.$mainPiece = mainPiece;
     this.super_init();
     this.$selected = false;
@@ -385,8 +400,11 @@ var classes = function(){
         while (tmp$0.hasNext()) {
           var neighbour = tmp$0.next();
           {
+            if (neighbour == null) {
+              continue;
+            }
             var alignDelta = piece.alignDelta(neighbour);
-            if (alignDelta.get_sqr() < 30) {
+            if (alignDelta.get_sqr() < 60) {
               if (neighbour.get_bundle() != this) {
                 this.merge(neighbour.get_bundle(), alignDelta);
               }
@@ -404,7 +422,8 @@ var classes = function(){
         while (tmp$0.hasNext()) {
           var piece = tmp$0.next();
           {
-            piece.draw(state);
+            piece.drawImagePart(state);
+            piece.drawBorders(state);
           }
         }
       }
@@ -489,7 +508,7 @@ var classes = function(){
     }
   }
   });
-  return {Shape:tmp$1, Piece:tmp$2, Bundle:tmp$3, Vector:tmp$4, CanvasState:tmp$0};
+  return {Piece:tmp$1, Shape:tmp$2, Bundle:tmp$3, Vector:tmp$4, CanvasState:tmp$0};
 }
 ();
 var kotlin = Kotlin.Namespace.create({initialize:function(){
@@ -548,7 +567,7 @@ var example = Kotlin.Namespace.create({initialize:function(){
   }
   , get_data:function(){
     {
-      return getImage('Chrysanthemum.jpg');
+      return getImage('Penguins.jpg');
     }
   }
   , get_width:function(){
@@ -601,6 +620,9 @@ var example = Kotlin.Namespace.create({initialize:function(){
 , get_Image:function(){
   return this.$Image;
 }
+, get_canvasState:function(){
+  return this.$canvasState;
+}
 , v$0:function(x, y){
   {
     return new example.Vector(x, y);
@@ -632,13 +654,41 @@ var example = Kotlin.Namespace.create({initialize:function(){
     , 1000);
   }
 }
-, get_canvasState:function(){
-  return this.$canvasState;
-}
 }, {Vector:classes.Vector, Bundle:classes.Bundle, Shape:classes.Shape, Piece:classes.Piece, CanvasState:classes.CanvasState});
+var util = Kotlin.Namespace.create({initialize:function(){
+}
+, shadowed:function(receiver, shadowOffset, alpha, render){
+  {
+    receiver.save();
+    receiver.shadowColor = 'rgba(100, 100, 100, ' + alpha + ')';
+    receiver.shadowBlur = 5;
+    receiver.shadowOffsetX = shadowOffset.get_x();
+    receiver.shadowOffsetY = shadowOffset.get_y();
+    render.call(receiver);
+    receiver.restore();
+  }
+}
+, fillPath:function(receiver, constructPath){
+  {
+    receiver.beginPath();
+    constructPath.call(receiver);
+    receiver.closePath();
+    receiver.fill();
+  }
+}
+, strokeLine:function(receiver, x1, y1, x2, y2){
+  {
+    receiver.beginPath();
+    receiver.moveTo(x1, y1);
+    receiver.lineTo(x2, y2);
+    receiver.stroke();
+  }
+}
+}, {});
+kotlin.ranges.initialize();
 kotlin.initialize();
 example.initialize();
-kotlin.ranges.initialize();
+util.initialize();
 
 var args = [];
 example.main(args);
