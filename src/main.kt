@@ -1,16 +1,6 @@
 package example
 
-import jquery.*
-import html5.*
-import java.util.ArrayList
 import js.*
-import js.Math
-import js.setInterval
-import html5.getCanvas
-import html5.getKotlinLogo
-import jquery.jq
-import js.setTimeout
-import java.util.List
 
 //
 //class Creature(override var pos : Vector, val state : CanvasState) : Shape() {
@@ -105,18 +95,11 @@ import java.util.List
 //}
 
 fun main(args : Array<String>) {
-    val state = CanvasState(getCanvas())
-    state.addShape(Image.splitInPieces().get(0))
-    setTimeout({
-        state.valid = false
-    })
-}
-
-fun <T> List<T>.reversed() : List<T> {
-    val result = ArrayList<T>()
-    var i = size()
-    while (i > 0) {
-        result.add(get(--i))
+    val pieces = Image.piecesList
+    for (piece in pieces) {
+        canvasState.addShape(piece.bundle)
     }
-    return result
+    setInterval({
+        canvasState.valid = false
+    }, 1000)
 }

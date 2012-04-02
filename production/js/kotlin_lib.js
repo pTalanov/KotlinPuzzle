@@ -324,7 +324,15 @@ var Kotlin;
                 this.add(it.next());
             }
         },
-        remove:function (index) {
+        remove:function(value) {
+            for (var i = 0; i < this.$size; ++i) {
+                if (this.array[i] == value) {
+                    this.removeByIndex(i);
+                    return;
+                }
+            }
+        },
+        removeByIndex:function (index) {
             for (var i = index; i < this.$size - 1; ++i) {
                 this.array[i] = this.array[i + 1];
             }

@@ -1,16 +1,18 @@
 package example
 
 import html5.Canvas
+import html5.getCanvas
 import html5.getContext
 import java.util.ArrayList
-import js.setInterval
 import jquery.MouseEvent
-import js.DomElement
 import jquery.jq
+import js.DomElement
+import js.setInterval
+import kotlin.ranges.reversed
 
 class CanvasState(val canvas : Canvas) {
-    var width = canvas.width.toDouble()
-    var height = canvas.height.toDouble()
+    var width = canvas.width
+    var height = canvas.height
     val size : Vector
     get() = v(width, height)
     val context = getContext()
@@ -18,14 +20,14 @@ class CanvasState(val canvas : Canvas) {
     var shapes = ArrayList<Shape>()
     var selection : Shape? = null
     var dragOff = Vector()
-    val interval = 1000 / 30
+    val interval = 1000 / 50
 
     {
         jq(canvas).mousedown {
             valid = false
             selection = null
             val mousePos = mousePos(it)
-            for (shape in shapes) {
+            for (shape in shapes.reversed()) {
                 if (mousePos in shape) {
                     dragOff = mousePos - shape.pos
                     shape.selected = true
@@ -43,9 +45,7 @@ class CanvasState(val canvas : Canvas) {
         }
 
         jq(canvas).mouseup {
-            if (selection != null) {
-                selection.sure().selected = false
-            }
+            selection?.selected = false
             selection = null
             valid = false
         }
@@ -71,21 +71,30 @@ class CanvasState(val canvas : Canvas) {
         valid = false
     }
 
+    fun removeShape(shape : Shape) {
+        shapes.remove(shape)
+        valid = false
+    }
+
     fun clear() {
         context.fillStyle = "#FFFFFF"
-        context.fillRect(0.0, 0.0, width, height)
+        context.fillRect(0, 0, width, height)
         context.strokeStyle = "#000000"
         context.lineWidth = 4.0
-        context.strokeRect(0.0, 0.0, width, height)
+        context.strokeRect(0, 0, width, height)
     }
 
     fun draw() {
         if (valid) return
 
         clear()
-        for (shape in shapes.reversed()) {
+        for (shape in shapes) {
             shape.draw(this)
         }
+        selection?.draw(this)
         valid = true
     }
 }
+
+
+val canvasState = CanvasState(getCanvas())

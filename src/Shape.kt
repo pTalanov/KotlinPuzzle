@@ -9,7 +9,7 @@ abstract class Shape() {
     abstract fun contains(mousePos : Vector) : Boolean
     abstract var pos : Vector
 
-    var selected : Boolean = false
+    open var selected : Boolean = false
 
     // a couple of helper extension methods we'll be using in the derived classes
     fun Context.shadowed(shadowOffset : Vector, alpha : Double, render : Context.() -> Unit) {

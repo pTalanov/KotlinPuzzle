@@ -3,6 +3,7 @@ package example
 import js.*
 
 fun v(x : Double, y : Double) = Vector(x, y)
+fun v(x : Int, y : Int) = Vector(x.toDouble(), y.toDouble())
 
 class Vector(val x : Double = 0.0, val y : Double = 0.0) {
     fun plus(v : Vector) = v(x + v.x, y + v.y)
