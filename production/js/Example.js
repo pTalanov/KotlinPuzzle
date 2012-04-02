@@ -637,8 +637,8 @@ var example = Kotlin.Namespace.create({initialize:function(){
 }
 }, {Vector:classes.Vector, Bundle:classes.Bundle, Shape:classes.Shape, Piece:classes.Piece, CanvasState:classes.CanvasState});
 kotlin.initialize();
-kotlin.ranges.initialize();
 example.initialize();
+kotlin.ranges.initialize();
 
 var args = [];
 example.main(args);

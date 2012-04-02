@@ -411,16 +411,16 @@ var Kotlin;
         Kotlin.System.out().print(s);
     };
 
-    Kotlin.AbstractFunctionInvokationError = Class.create();
+    Kotlin.AbstractFunctionInvocationError = Class.create();
 
     Kotlin.Iterator = Class.create({
         initialize:function () {
         },
         next:function () {
-            throw new Kotlin.AbstractFunctionInvokationError();
+            throw new Kotlin.AbstractFunctionInvocationError();
         },
         hasNext:function () {
-            throw new Kotlin.AbstractFunctionInvokationError();
+            throw new Kotlin.AbstractFunctionInvocationError();
         }
     });
 
@@ -504,7 +504,7 @@ var Kotlin;
                 initialize:function () {
                 },
                 compare:function (el1, el2) {
-                    throw new Kotlin.AbstractFunctionInvokationError();
+                    throw new Kotlin.AbstractFunctionInvocationError();
                 }
             }
     );

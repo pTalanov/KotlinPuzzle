@@ -12,7 +12,7 @@ fun IntRange.shuffled() : Array<Int> {
     return Array(ordered.size()) {
         val randomValue = Math.floor((ordered.size() - 1) * Math.random())
         val value = ordered[randomValue]
-        ordered.remove(value)
+        ordered.remove(value as Any?)
         value
     }
 }
