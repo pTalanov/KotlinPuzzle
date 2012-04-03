@@ -7,11 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e2e93b7-fde3-48dc-a9e4-e7960087045d" name="Default" comment="Better shuffling of the pieces.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/production/css/custom.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/production/js/Example.js" afterPath="$PROJECT_DIR$/production/js/Example.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CanvasState.kt" afterPath="$PROJECT_DIR$/src/CanvasState.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Image.kt" afterPath="$PROJECT_DIR$/src/Image.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/ranges.kt" afterPath="$PROJECT_DIR$/src/util/ranges.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/production/template.html" afterPath="$PROJECT_DIR$/production/template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Piece.kt" afterPath="$PROJECT_DIR$/src/Piece.kt" />
     </list>
     <ignored path="Example.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,10 +69,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Image.kt" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Image.kt">
+      <file leaf-file-name="template.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/production/template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="26" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.7567568">
+            <state line="20" column="74" selection-start="754" selection-end="754" vertical-scroll-proportion="0.54140127">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="canvas_helper.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/production/js/canvas_helper.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Penguins.jpg" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/production/Penguins.jpg">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="57" selection-start="537" selection-end="537" vertical-scroll-proportion="-10.2">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Piece.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Piece.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="48" selection-start="1273" selection-end="1273" vertical-scroll-proportion="-11.56">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ranges.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/ranges.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="35" selection-start="182" selection-end="182" vertical-scroll-proportion="-5.44">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Shape.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Shape.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="39" selection-start="284" selection-end="284" vertical-scroll-proportion="-6.12">
               <folding />
             </state>
           </provider>
@@ -87,71 +139,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ranges.kt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/util/ranges.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.kt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="145" selection-start="589" selection-end="589" vertical-scroll-proportion="-2.72">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CanvasState.kt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CanvasState.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="31" selection-start="258" selection-end="258" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Piece.kt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Piece.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="47" selection-start="250" selection-end="250" vertical-scroll-proportion="-6.8">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kotlinlogo.png" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/production/kotlinlogo.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="context.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/util/context.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="1" selection-start="643" selection-end="643" vertical-scroll-proportion="-21.76">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Example.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/production/js/Example.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="289" column="72" selection-start="7050" selection-end="7050" vertical-scroll-proportion="-30.461538">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bundle.kt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Bundle.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="150" selection-start="1111" selection-end="1111" vertical-scroll-proportion="-18.16">
+            <state line="12" column="71" selection-start="325" selection-end="325" vertical-scroll-proportion="-8.16">
               <folding />
             </state>
           </provider>
@@ -170,10 +161,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Math.kt" />
         <option value="$PROJECT_DIR$/production/js/canvas_helper.js" />
         <option value="$PROJECT_DIR$/../Kotlin/clean_jet/js/js.libraries/src/core/core.kt" />
-        <option value="$PROJECT_DIR$/production/template.html" />
         <option value="$PROJECT_DIR$/src/Vector.kt" />
         <option value="$PROJECT_DIR$/../Kotlin/clean_jet/js/js.libraries/src/html5/canvas.kt" />
         <option value="$PROJECT_DIR$/src/main.kt" />
@@ -182,10 +171,12 @@
         <option value="$PROJECT_DIR$/src/Bundle.kt" />
         <option value="$PROJECT_DIR$/src/util/context.kt" />
         <option value="$PROJECT_DIR$/production/js/Example.js" />
-        <option value="$PROJECT_DIR$/src/Piece.kt" />
         <option value="$PROJECT_DIR$/src/CanvasState.kt" />
         <option value="$PROJECT_DIR$/src/util/ranges.kt" />
         <option value="$PROJECT_DIR$/src/Image.kt" />
+        <option value="$PROJECT_DIR$/production/css/custom.css" />
+        <option value="$PROJECT_DIR$/src/Piece.kt" />
+        <option value="$PROJECT_DIR$/production/template.html" />
       </list>
     </option>
   </component>
@@ -341,6 +332,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="production" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Example" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Example" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -377,8 +386,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Dev\Projects\Example\production" />
       <recent name="C:\Dev\Projects\Example\production\js" />
+      <recent name="C:\Dev\Projects\Example\production" />
     </key>
   </component>
   <component name="RunManager" selected="K2JS.run">
@@ -636,7 +645,7 @@
     </configuration>
     <configuration default="false" name="run" type="K2JSConfigurationType" factoryName="K2JS">
       <K2JSConfigurationSettings>
-        <option name="browserFamily" value="CHROME" />
+        <option name="browserFamily" value="FIREFOX" />
         <option name="generatedFilePath" value="$PROJECT_DIR$/production/js" />
         <option name="pageToOpenFilePath" value="$PROJECT_DIR$/production/template.html" />
         <option name="shouldOpenInBrowserAfterTranslation" value="true" />
@@ -698,7 +707,11 @@
       <created>1333450855666</created>
       <updated>1333450855666</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Better shuffling of the pieces.">
+      <created>1333453422732</created>
+      <updated>1333453422732</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -793,55 +806,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Kotlin/clean_jet/js/js.libraries/src/core/javautil.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="24" selection-start="1449" selection-end="1449" vertical-scroll-proportion="-8.72" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Kotlin/clean_jet/js/js.libraries/src/html5/canvas.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="59" selection-start="2148" selection-end="2148" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/production/js/kotlin_lib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="417" column="46" selection-start="11827" selection-end="11827" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/production/template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="54" selection-start="783" selection-end="783" vertical-scroll-proportion="-14.384615" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/production/Chrysanthemum.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shape.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="39" selection-start="284" selection-end="284" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Vector.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="34" selection-start="607" selection-end="607" vertical-scroll-proportion="-12.24">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/production/js/Example.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="289" column="72" selection-start="7050" selection-end="7050" vertical-scroll-proportion="-30.461538">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Bundle.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="150" selection-start="1111" selection-end="1111" vertical-scroll-proportion="-18.16">
           <folding />
         </state>
       </provider>
@@ -853,42 +820,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CanvasState.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="31" selection-start="258" selection-end="258" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Piece.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="47" selection-start="250" selection-end="250" vertical-scroll-proportion="-6.8">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/ranges.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/context.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="1" selection-start="643" selection-end="643" vertical-scroll-proportion="-21.76">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="145" selection-start="589" selection-end="589" vertical-scroll-proportion="-2.72">
+        <state line="12" column="31" selection-start="258" selection-end="258" vertical-scroll-proportion="44.2">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Image.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="26" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.7567568">
+        <state line="47" column="125" selection-start="1268" selection-end="1268" vertical-scroll-proportion="-31.96">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bundle.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="150" selection-start="1111" selection-end="1111" vertical-scroll-proportion="-4.76">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/production/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="4" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/ranges.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="35" selection-start="182" selection-end="182" vertical-scroll-proportion="-5.44">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shape.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="39" selection-start="284" selection-end="284" vertical-scroll-proportion="-6.12">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Vector.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="34" selection-start="607" selection-end="607" vertical-scroll-proportion="-12.24">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/context.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="71" selection-start="325" selection-end="325" vertical-scroll-proportion="-8.16">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="57" selection-start="537" selection-end="537" vertical-scroll-proportion="-10.2">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Piece.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="48" selection-start="1273" selection-end="1273" vertical-scroll-proportion="-11.56">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/production/js/canvas_helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/production/Penguins.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/production/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="74" selection-start="754" selection-end="754" vertical-scroll-proportion="0.54140127">
           <folding />
         </state>
       </provider>

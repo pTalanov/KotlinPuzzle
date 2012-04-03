@@ -211,6 +211,7 @@ var classes = function(){
     this.$imageY = imageY;
     this.$width = width;
     this.$height = height;
+    this.$shadowOffset = example.v$0(-4, 4);
     this.$pos = startingPos;
     this.$bundle = new example.Bundle(this);
   }
@@ -232,8 +233,18 @@ var classes = function(){
   , get_height:function(){
     return this.$height;
   }
+  , get_shadowOffset:function(){
+    return this.$shadowOffset;
+  }
   , get_pos:function(){
-    return this.$pos;
+    var tmp$0;
+    if (this.get_bundle().get_selected())
+      tmp$0 = this.$pos;
+    else 
+      tmp$0 = this.$pos.plus(this.get_shadowOffset());
+    {
+      return tmp$0;
+    }
   }
   , set_pos:function(tmp$0){
     this.$pos = tmp$0;
@@ -293,22 +304,36 @@ var classes = function(){
     {
       var context = state.get_context();
       var tmp$0;
-      util.drawing(context, (tmp$0 = this , function(){
+      this.drawBorder(context, this.get_leftNeighbour(), true, (tmp$0 = this , function(){
         {
-          tmp$0.setLineStyleFor(this, tmp$0.get_leftNeighbour());
           util.strokeLine(this, Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()), Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height());
-          tmp$0.setLineStyleFor(this, tmp$0.get_rightNeighbour());
-          util.strokeLine(this, Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()), Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height());
-          tmp$0.setLineStyleFor(this, tmp$0.get_bottomNeighbour());
-          util.strokeLine(context, Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height(), Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height());
-          tmp$0.setLineStyleFor(this, tmp$0.get_topNeighbour());
-          util.strokeLine(this, Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()), Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()));
+        }
+      }
+      ));
+      var tmp$1;
+      this.drawBorder(context, this.get_rightNeighbour(), false, (tmp$1 = this , function(){
+        {
+          util.strokeLine(this, Math.floor(tmp$1.get_pos().get_x()) + tmp$1.get_width(), Math.floor(tmp$1.get_pos().get_y()), Math.floor(tmp$1.get_pos().get_x()) + tmp$1.get_width(), Math.floor(tmp$1.get_pos().get_y()) + tmp$1.get_height());
+        }
+      }
+      ));
+      var tmp$2;
+      this.drawBorder(context, this.get_bottomNeighbour(), true, (tmp$2 = this , function(){
+        {
+          util.strokeLine(this, Math.floor(tmp$2.get_pos().get_x()), Math.floor(tmp$2.get_pos().get_y()) + tmp$2.get_height(), Math.floor(tmp$2.get_pos().get_x()) + tmp$2.get_width(), Math.floor(tmp$2.get_pos().get_y()) + tmp$2.get_height());
+        }
+      }
+      ));
+      var tmp$3;
+      this.drawBorder(context, this.get_topNeighbour(), false, (tmp$3 = this , function(){
+        {
+          util.strokeLine(this, Math.floor(tmp$3.get_pos().get_x()), Math.floor(tmp$3.get_pos().get_y()), Math.floor(tmp$3.get_pos().get_x()) + tmp$3.get_width(), Math.floor(tmp$3.get_pos().get_y()));
         }
       }
       ));
     }
   }
-  , setLineStyleFor:function(receiver, neighbour){
+  , setLineStyleFor:function(receiver, neighbour, shadow){
     {
       var tmp$0;
       if ((tmp$0 = neighbour , tmp$0 != null?tmp$0.get_bundle():null) == this.get_bundle()) {
@@ -316,9 +341,23 @@ var classes = function(){
         receiver.lineWidth = 2;
       }
        else {
+        if (shadow && this.get_bundle() == example.get_canvasState().get_selection()) {
+          receiver.shadowColor = 'rgba(100, 100, 100, 0.9)';
+          receiver.shadowBlur = 4;
+          receiver.shadowOffsetX = this.get_shadowOffset().get_x();
+          receiver.shadowOffsetY = this.get_shadowOffset().get_y();
+        }
         receiver.strokeStyle = '#000000';
         receiver.lineWidth = 4;
       }
+    }
+  }
+  , drawBorder:function(receiver, neighbour, drawShadow, drawLine){
+    {
+      receiver.save();
+      this.setLineStyleFor(receiver, neighbour, drawShadow);
+      drawLine.call(receiver);
+      receiver.restore();
     }
   }
   , drawImagePart:function(state){
@@ -344,7 +383,7 @@ var classes = function(){
   , alignDelta:function(otherPiece){
     {
       var imageDistance = otherPiece.get_indexVector().minus(this.get_indexVector()).times(example.get_Image().get_pieceSize());
-      var realDistance = otherPiece.get_pos().minus(this.get_pos());
+      var realDistance = otherPiece.get_pos().minus(this.$pos);
       return realDistance.minus(imageDistance);
     }
   }
@@ -592,6 +631,26 @@ var util = Kotlin.Namespace.create({initialize:function(){
   }
 }
 }, {});
+var kotlin = Kotlin.Namespace.create({initialize:function(){
+}
+, set:function(receiver, key, value){
+  {
+    return receiver.put(key, value);
+  }
+}
+}, {ranges:Kotlin.Namespace.create({initialize:function(){
+}
+, reversed:function(receiver){
+  {
+    var result = new Kotlin.ArrayList;
+    var i = receiver.size();
+    while (i > 0) {
+      result.add(receiver.get(--i));
+    }
+    return result;
+  }
+}
+}, {})});
 var example = Kotlin.Namespace.create({initialize:function(){
   this.$canvasState = new example.CanvasState(getCanvas());
   this.$Image = Kotlin.object.create({initialize:function(){
@@ -690,54 +749,10 @@ var example = Kotlin.Namespace.create({initialize:function(){
   }
 }
 }, {Vector:classes.Vector, Bundle:classes.Bundle, Shape:classes.Shape, Piece:classes.Piece, Shuffler:classes.Shuffler, CanvasState:classes.CanvasState});
-var kotlin = Kotlin.Namespace.create({initialize:function(){
-}
-, set:function(receiver, key, value){
-  {
-    return receiver.put(key, value);
-  }
-}
-}, {ranges:Kotlin.Namespace.create({initialize:function(){
-}
-, shuffled:function(receiver){
-  {
-    var ordered = new Kotlin.ArrayList;
-    var tmp$0;
-    var tmp$1;
-    var tmp$2;
-    var tmp$3;
-    {
-      tmp$0 = receiver , (tmp$1 = tmp$0.get_reversed()?-1:1 , (tmp$2 = tmp$0.get_start() , tmp$3 = tmp$0.get_end() + tmp$1));
-      for (var i = tmp$2; i != tmp$3; i += tmp$1) {
-        ordered.add(i);
-      }
-    }
-    return Kotlin.arrayFromFun(ordered.size(), function(it){
-      {
-        var randomValue = Math.floor((ordered.size() - 1) * Math.random());
-        var value = ordered.get(randomValue);
-        ordered.remove(value);
-        return value;
-      }
-    }
-    );
-  }
-}
-, reversed:function(receiver){
-  {
-    var result = new Kotlin.ArrayList;
-    var i = receiver.size();
-    while (i > 0) {
-      result.add(receiver.get(--i));
-    }
-    return result;
-  }
-}
-}, {})});
 util.initialize();
 kotlin.ranges.initialize();
-example.initialize();
 kotlin.initialize();
+example.initialize();
 
 var args = [];
 example.main(args);
