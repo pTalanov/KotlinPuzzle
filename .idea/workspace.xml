@@ -6,13 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2e93b7-fde3-48dc-a9e4-e7960087045d" name="Default" comment="">
+    <list default="true" id="7e2e93b7-fde3-48dc-a9e4-e7960087045d" name="Default" comment="Better shuffling of the pieces.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/production/js/Example.js" afterPath="$PROJECT_DIR$/production/js/Example.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CanvasState.kt" afterPath="$PROJECT_DIR$/src/CanvasState.kt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Image.kt" afterPath="$PROJECT_DIR$/src/Image.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Piece.kt" afterPath="$PROJECT_DIR$/src/Piece.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/context.kt" afterPath="$PROJECT_DIR$/src/util/context.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/ranges.kt" afterPath="$PROJECT_DIR$/src/util/ranges.kt" />
     </list>
     <ignored path="Example.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,10 +69,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Image.kt" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Image.kt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Image.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="77" selection-start="627" selection-end="627" vertical-scroll-proportion="-15.64">
+            <state line="50" column="26" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.7567568">
               <folding />
             </state>
           </provider>
@@ -91,7 +90,7 @@
       <file leaf-file-name="ranges.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/util/ranges.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="113" selection-start="586" selection-end="586" vertical-scroll-proportion="-17.68">
+            <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -100,16 +99,16 @@
       <file leaf-file-name="main.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="145" selection-start="589" selection-end="589" vertical-scroll-proportion="-10.88">
+            <state line="16" column="145" selection-start="589" selection-end="589" vertical-scroll-proportion="-2.72">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CanvasState.kt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CanvasState.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CanvasState.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="30" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.7837838">
+            <state line="12" column="31" selection-start="258" selection-end="258" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -118,7 +117,7 @@
       <file leaf-file-name="Piece.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Piece.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="54" selection-start="250" selection-end="250" vertical-scroll-proportion="-4.76">
+            <state line="10" column="47" selection-start="250" selection-end="250" vertical-scroll-proportion="-6.8">
               <folding />
             </state>
           </provider>
@@ -134,7 +133,7 @@
       <file leaf-file-name="context.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/util/context.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="11" selection-start="643" selection-end="643" vertical-scroll-proportion="-21.76">
+            <state line="32" column="1" selection-start="643" selection-end="643" vertical-scroll-proportion="-21.76">
               <folding />
             </state>
           </provider>
@@ -143,7 +142,7 @@
       <file leaf-file-name="Example.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/production/js/Example.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="256" column="72" selection-start="6462" selection-end="6462" vertical-scroll-proportion="-30.461538">
+            <state line="289" column="72" selection-start="7050" selection-end="7050" vertical-scroll-proportion="-30.461538">
               <folding />
             </state>
           </provider>
@@ -179,14 +178,14 @@
         <option value="$PROJECT_DIR$/../Kotlin/clean_jet/js/js.libraries/src/html5/canvas.kt" />
         <option value="$PROJECT_DIR$/src/main.kt" />
         <option value="$PROJECT_DIR$/production/js/kotlin_lib.js" />
-        <option value="$PROJECT_DIR$/src/util/ranges.kt" />
         <option value="$PROJECT_DIR$/src/Shape.kt" />
         <option value="$PROJECT_DIR$/src/Bundle.kt" />
-        <option value="$PROJECT_DIR$/src/Image.kt" />
         <option value="$PROJECT_DIR$/src/util/context.kt" />
         <option value="$PROJECT_DIR$/production/js/Example.js" />
         <option value="$PROJECT_DIR$/src/Piece.kt" />
         <option value="$PROJECT_DIR$/src/CanvasState.kt" />
+        <option value="$PROJECT_DIR$/src/util/ranges.kt" />
+        <option value="$PROJECT_DIR$/src/Image.kt" />
       </list>
     </option>
   </component>
@@ -262,6 +261,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Example" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Example" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Image.kt" />
+              <option name="myItemType" value="org.jetbrains.jet.plugin.projectView.JetFileTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -677,7 +694,11 @@
       <created>1333385057958</created>
       <updated>1333385057958</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add borders between pieces of the bundle. Make the last selected piece draw on top of the others.">
+      <created>1333450855666</created>
+      <updated>1333450855666</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -689,10 +710,11 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297244" sideWeight="0.49812934" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297244" sideWeight="0.5002672" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977018" sideWeight="0.67027557" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297244" sideWeight="0.49599144" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -702,7 +724,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297244" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297244" sideWeight="0.49812934" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -744,7 +765,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some more visual stuff." />
+    <option name="LAST_COMMIT_MESSAGE" value="Better shuffling of the pieces." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -761,6 +782,8 @@
     <MESSAGE value="Very basic stuff." />
     <MESSAGE value="Migrated to new api." />
     <MESSAGE value="Some more visual stuff." />
+    <MESSAGE value="Add borders between pieces of the bundle. Make the last selected piece draw on top of the others." />
+    <MESSAGE value="Better shuffling of the pieces." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -802,13 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Image.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="77" selection-start="627" selection-end="627" vertical-scroll-proportion="-15.64">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Vector.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="34" selection-start="607" selection-end="607" vertical-scroll-proportion="-12.24">
@@ -818,7 +834,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/production/js/Example.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="256" column="72" selection-start="6462" selection-end="6462" vertical-scroll-proportion="-30.461538">
+        <state line="289" column="72" selection-start="7050" selection-end="7050" vertical-scroll-proportion="-30.461538">
           <folding />
         </state>
       </provider>
@@ -830,42 +846,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Piece.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="54" selection-start="250" selection-end="250" vertical-scroll-proportion="-4.76">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/production/kotlinlogo.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/context.kt">
+    <entry file="file://$PROJECT_DIR$/src/CanvasState.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="11" selection-start="643" selection-end="643" vertical-scroll-proportion="-21.76">
+        <state line="12" column="31" selection-start="258" selection-end="258" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Piece.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="47" selection-start="250" selection-end="250" vertical-scroll-proportion="-6.8">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/util/ranges.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="113" selection-start="586" selection-end="586" vertical-scroll-proportion="-17.68">
+        <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/context.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="1" selection-start="643" selection-end="643" vertical-scroll-proportion="-21.76">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="145" selection-start="589" selection-end="589" vertical-scroll-proportion="-10.88">
+        <state line="16" column="145" selection-start="589" selection-end="589" vertical-scroll-proportion="-2.72">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CanvasState.kt">
+    <entry file="file://$PROJECT_DIR$/src/Image.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="30" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.7837838">
+        <state line="50" column="26" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.7567568">
           <folding />
         </state>
       </provider>

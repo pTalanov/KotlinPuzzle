@@ -11,21 +11,20 @@ import js.setInterval
 import kotlin.ranges.reversed
 
 class CanvasState(val canvas : Canvas) {
-    var width = canvas.width
-    var height = canvas.height
+    val width = canvas.width
+    val height = canvas.height
     val size : Vector
     get() = v(width, height)
     val context = getContext()
     var valid = false
-    var shapes = ArrayList<Shape>()
+    val shapes = ArrayList<Shape>()
     var selection : Shape? = null
     var dragOff = Vector()
     val interval = 1000 / 50
 
     {
         jq(canvas).mousedown {
-            valid = false
-            selection = null
+            unsetSelection()
             val mousePos = mousePos(it)
             for (shape in shapes.reversed()) {
                 if (mousePos in shape) {
@@ -46,13 +45,7 @@ class CanvasState(val canvas : Canvas) {
         }
 
         jq(canvas).mouseup {
-            val sel = selection
-            if (sel != null) {
-                sel.selected = false
-                addShape(sel)
-            }
-            selection = null
-            valid = false
+            unsetSelection()
         }
 
         setInterval({
@@ -78,6 +71,16 @@ class CanvasState(val canvas : Canvas) {
 
     fun removeShape(shape : Shape) {
         shapes.remove(shape)
+        valid = false
+    }
+
+    fun unsetSelection() {
+        val sel = selection
+        if (sel != null) {
+            sel.selected = false
+            addShape(sel)
+        }
+        selection = null
         valid = false
     }
 

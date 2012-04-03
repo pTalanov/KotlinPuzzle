@@ -13,8 +13,7 @@ var classes = function(){
       var tmp$0_0;
       $(this.get_canvas()).mousedown((tmp$0_0 = this , function(it){
         {
-          tmp$0_0.set_valid(false);
-          tmp$0_0.set_selection(null);
+          tmp$0_0.unsetSelection();
           var mousePos = tmp$0_0.mousePos_0(it);
           var tmp$0;
           {
@@ -48,13 +47,7 @@ var classes = function(){
       var tmp$2;
       $(this.get_canvas()).mouseup((tmp$2 = this , function(it){
         {
-          if (tmp$2.get_selection() != null) {
-            var tmp$0;
-            tmp$0 = tmp$2.get_selection() , tmp$0 != null?tmp$0.set_selected(false):null;
-            tmp$2.addShape(Kotlin.sure(tmp$2.get_selection()));
-          }
-          tmp$2.set_selection(null);
-          tmp$2.set_valid(false);
+          tmp$2.unsetSelection();
         }
       }
       ));
@@ -73,14 +66,8 @@ var classes = function(){
   , get_width:function(){
     return this.$width;
   }
-  , set_width:function(tmp$0){
-    this.$width = tmp$0;
-  }
   , get_height:function(){
     return this.$height;
-  }
-  , set_height:function(tmp$0){
-    this.$height = tmp$0;
   }
   , get_size:function(){
     {
@@ -98,9 +85,6 @@ var classes = function(){
   }
   , get_shapes:function(){
     return this.$shapes;
-  }
-  , set_shapes:function(tmp$0){
-    this.$shapes = tmp$0;
   }
   , get_selection:function(){
     return this.$selection;
@@ -141,6 +125,17 @@ var classes = function(){
       this.set_valid(false);
     }
   }
+  , unsetSelection:function(){
+    {
+      var sel = this.get_selection();
+      if (sel != null) {
+        sel.set_selected(false);
+        this.addShape(sel);
+      }
+      this.set_selection(null);
+      this.set_valid(false);
+    }
+  }
   , clear:function(){
     {
       this.get_context().fillStyle = '#FFFFFF';
@@ -171,7 +166,45 @@ var classes = function(){
     }
   }
   });
-  var tmp$1 = Kotlin.Class.create({initialize:function(i, j, startingPos, imageX, imageY, width, height){
+  var tmp$1 = Kotlin.Class.create({initialize:function(x, y){
+    this.$x = x;
+    this.$y = y;
+    this.$all = new Kotlin.ArrayList;
+    {
+      var tmp$0;
+      {
+        tmp$0 = this.get_x() - 1 + 1;
+        for (var i = 0; i != tmp$0; ++i) {
+          var tmp$1;
+          {
+            tmp$1 = this.get_y() - 1 + 1;
+            for (var j = 0; j != tmp$1; ++j) {
+              this.get_all().add([i, j]);
+            }
+          }
+        }
+      }
+    }
+  }
+  , get_x:function(){
+    return this.$x;
+  }
+  , get_y:function(){
+    return this.$y;
+  }
+  , get_all:function(){
+    return this.$all;
+  }
+  , getNextPair:function(){
+    {
+      var randomValue = Math.floor((this.get_all().size() - 1) * Math.random());
+      var value = this.get_all().get(randomValue);
+      this.get_all().remove(value);
+      return value;
+    }
+  }
+  });
+  var tmp$2 = Kotlin.Class.create({initialize:function(i, j, startingPos, imageX, imageY, width, height){
     this.$i = i;
     this.$j = j;
     this.$imageX = imageX;
@@ -316,7 +349,7 @@ var classes = function(){
     }
   }
   });
-  var tmp$2 = Kotlin.Class.create({initialize:function(){
+  var tmp$3 = Kotlin.Class.create({initialize:function(){
     this.$selected_0 = false;
   }
   , draw:function(state){
@@ -336,7 +369,7 @@ var classes = function(){
     this.$selected_0 = tmp$0;
   }
   });
-  var tmp$3 = Kotlin.Class.create(tmp$2, {initialize:function(mainPiece){
+  var tmp$4 = Kotlin.Class.create(tmp$3, {initialize:function(mainPiece){
     this.$mainPiece = mainPiece;
     this.super_init();
     this.$selected = false;
@@ -463,7 +496,7 @@ var classes = function(){
     }
   }
   });
-  var tmp$4 = Kotlin.Class.create({initialize:function(x, y){
+  var tmp$5 = Kotlin.Class.create({initialize:function(x, y){
     this.$x = x;
     this.$y = y;
   }
@@ -521,9 +554,44 @@ var classes = function(){
     }
   }
   });
-  return {Piece:tmp$1, Shape:tmp$2, Bundle:tmp$3, Vector:tmp$4, CanvasState:tmp$0};
+  return {Vector:tmp$5, Shuffler:tmp$1, Piece:tmp$2, Shape:tmp$3, Bundle:tmp$4, CanvasState:tmp$0};
 }
 ();
+var util = Kotlin.Namespace.create({initialize:function(){
+}
+, shadowed:function(receiver, shadowOffset, alpha, render){
+  {
+    receiver.save();
+    receiver.shadowColor = 'rgba(100, 100, 100, ' + alpha + ')';
+    receiver.shadowBlur = 5;
+    receiver.shadowOffsetX = shadowOffset.get_x();
+    receiver.shadowOffsetY = shadowOffset.get_y();
+    render.call(receiver);
+    receiver.restore();
+  }
+}
+, fillPath:function(receiver, constructPath){
+  {
+    receiver.beginPath();
+    constructPath.call(receiver);
+    receiver.closePath();
+    receiver.fill();
+  }
+}
+, strokeLine:function(receiver, x1, y1, x2, y2){
+  {
+    receiver.beginPath();
+    receiver.moveTo(x1, y1);
+    receiver.lineTo(x2, y2);
+    receiver.stroke();
+  }
+}
+, drawing:function(receiver, f){
+  {
+    f.call(receiver);
+  }
+}
+}, {});
 var example = Kotlin.Namespace.create({initialize:function(){
   this.$canvasState = new example.CanvasState(getCanvas());
   this.$Image = Kotlin.object.create({initialize:function(){
@@ -563,17 +631,15 @@ var example = Kotlin.Namespace.create({initialize:function(){
   }
   , splitInPieces:function(){
     {
-      var xRange = new Kotlin.NumberRange(0, this.get_piecesX() - 1 - 0 + 1, false);
-      var xShuffled = kotlin.ranges.shuffled(xRange);
-      var yRange = new Kotlin.NumberRange(0, this.get_piecesY() - 1 - 0 + 1, false);
-      var yShuffled = kotlin.ranges.shuffled(yRange);
+      var shuffler = new example.Shuffler(this.get_piecesX(), this.get_piecesY());
       var tmp$0_0;
       return Kotlin.arrayFromFun(this.get_piecesX(), (tmp$0_0 = this , function(x){
         {
           var tmp$0;
           return Kotlin.arrayFromFun(tmp$0_0.get_piecesY(), (tmp$0 = tmp$0_0 , function(y){
             {
-              var imagePiece = new example.Piece(x, y, example.v(xShuffled[x] * tmp$0.get_pieceSize(), yShuffled[y] * tmp$0.get_pieceSize()), x * tmp$0.get_pieceSize(), y * tmp$0.get_pieceSize(), tmp$0.get_pieceSize(), tmp$0.get_pieceSize());
+              var xy = shuffler.getNextPair();
+              var imagePiece = new example.Piece(x, y, example.v(xy[0] * tmp$0.get_pieceSize(), xy[1] * tmp$0.get_pieceSize()), x * tmp$0.get_pieceSize(), y * tmp$0.get_pieceSize(), tmp$0.get_pieceSize(), tmp$0.get_pieceSize());
               tmp$0.get_piecesList().add(imagePiece);
               return imagePiece;
             }
@@ -623,42 +689,7 @@ var example = Kotlin.Namespace.create({initialize:function(){
     , 1000);
   }
 }
-}, {Vector:classes.Vector, Bundle:classes.Bundle, Shape:classes.Shape, Piece:classes.Piece, CanvasState:classes.CanvasState});
-var util = Kotlin.Namespace.create({initialize:function(){
-}
-, shadowed:function(receiver, shadowOffset, alpha, render){
-  {
-    receiver.save();
-    receiver.shadowColor = 'rgba(100, 100, 100, ' + alpha + ')';
-    receiver.shadowBlur = 5;
-    receiver.shadowOffsetX = shadowOffset.get_x();
-    receiver.shadowOffsetY = shadowOffset.get_y();
-    render.call(receiver);
-    receiver.restore();
-  }
-}
-, fillPath:function(receiver, constructPath){
-  {
-    receiver.beginPath();
-    constructPath.call(receiver);
-    receiver.closePath();
-    receiver.fill();
-  }
-}
-, strokeLine:function(receiver, x1, y1, x2, y2){
-  {
-    receiver.beginPath();
-    receiver.moveTo(x1, y1);
-    receiver.lineTo(x2, y2);
-    receiver.stroke();
-  }
-}
-, drawing:function(receiver, f){
-  {
-    f.call(receiver);
-  }
-}
-}, {});
+}, {Vector:classes.Vector, Bundle:classes.Bundle, Shape:classes.Shape, Piece:classes.Piece, Shuffler:classes.Shuffler, CanvasState:classes.CanvasState});
 var kotlin = Kotlin.Namespace.create({initialize:function(){
 }
 , set:function(receiver, key, value){
@@ -703,9 +734,9 @@ var kotlin = Kotlin.Namespace.create({initialize:function(){
   }
 }
 }, {})});
+util.initialize();
 kotlin.ranges.initialize();
 example.initialize();
-util.initialize();
 kotlin.initialize();
 
 var args = [];
