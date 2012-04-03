@@ -32,6 +32,7 @@ class CanvasState(val canvas : Canvas) {
                     dragOff = mousePos - shape.pos
                     shape.selected = true
                     selection = shape
+                    removeShape(shape)
                     break
                 }
             }
@@ -45,7 +46,11 @@ class CanvasState(val canvas : Canvas) {
         }
 
         jq(canvas).mouseup {
-            selection?.selected = false
+            val sel = selection
+            if (sel != null) {
+                sel.selected = false
+                addShape(sel)
+            }
             selection = null
             valid = false
         }

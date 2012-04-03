@@ -27,3 +27,7 @@ fun Context.strokeLine(x1 : Int, y1 : Int, x2 : Int, y2 : Int) {
     lineTo(x2, y2)
     stroke()
 }
+
+fun Context.drawing(f : Context.()->Unit) {
+    f()
+}

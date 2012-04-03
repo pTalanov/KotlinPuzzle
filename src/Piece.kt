@@ -1,7 +1,9 @@
 package example
 
+import html5.Context
 import java.util.ArrayList
 import java.util.List
+import util.drawing
 import util.strokeLine
 
 class Piece(val i : Int, val j : Int,
@@ -14,30 +16,39 @@ class Piece(val i : Int, val j : Int,
     val leftNeighbour : Piece?
     get() = if (i > 0) Image.pieces[i - 1][j] else null
     val rightNeighbour : Piece?
-    get() = if (i < Image.piecesX - 2) Image.pieces[i + 1][j] else null
+    get() = if (i < Image.piecesX - 1) Image.pieces[i + 1][j] else null
     val topNeighbour : Piece?
     get() = if (j > 0) Image.pieces[i][j - 1] else null
     val bottomNeighbour : Piece?
-    get() = if (j < Image.piecesY - 2) Image.pieces[i][j + 1] else null
+    get() = if (j < Image.piecesY - 1) Image.pieces[i][j + 1] else null
 
 
     fun contains(mousePos : Vector) : Boolean = mousePos.isInRect(pos, v(width.toDouble(), height.toDouble()))
 
     fun drawBorders(state : CanvasState) {
         val context = state.context
-        context.strokeStyle = "#000000"
-        context.lineWidth = 4.0
-        if (leftNeighbour?.bundle != bundle) {
-            context.strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt(), pos.y.toInt() + height)
-        }
-        if (rightNeighbour?.bundle != bundle) {
-            context.strokeLine(pos.x.toInt() + width, pos.y.toInt(), pos.x.toInt() + width, pos.y.toInt() + height)
-        }
-        if (bottomNeighbour?.bundle != bundle)  {
+        context.drawing {
+            setLineStyleFor(leftNeighbour)
+            strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt(), pos.y.toInt() + height)
+
+            setLineStyleFor(rightNeighbour)
+            strokeLine(pos.x.toInt() + width, pos.y.toInt(), pos.x.toInt() + width, pos.y.toInt() + height)
+
+            setLineStyleFor(bottomNeighbour)
             context.strokeLine(pos.x.toInt(), pos.y.toInt() + height, pos.x.toInt() + width, pos.y.toInt() + height)
+
+            setLineStyleFor(topNeighbour)
+            strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt() + width, pos.y.toInt())
         }
-        if (topNeighbour?.bundle != bundle) {
-            context.strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt() + width, pos.y.toInt())
+    }
+
+    fun Context.setLineStyleFor(neighbour : Piece?) {
+        if (neighbour?.bundle == bundle) {
+            strokeStyle = "#FFFFFF"
+            lineWidth = 2.0
+        } else {
+            strokeStyle = "#000000"
+            lineWidth = 4.0
         }
     }
 

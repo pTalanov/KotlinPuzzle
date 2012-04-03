@@ -34,7 +34,6 @@ object Image {
                 piecesList.add(imagePiece)
                 imagePiece
             }
-
         }
     }
 }

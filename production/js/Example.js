@@ -26,6 +26,7 @@ var classes = function(){
                   tmp$0_0.set_dragOff(mousePos.minus(shape.get_pos()));
                   shape.set_selected(true);
                   tmp$0_0.set_selection(shape);
+                  tmp$0_0.removeShape(shape);
                   break;
                 }
               }
@@ -47,8 +48,11 @@ var classes = function(){
       var tmp$2;
       $(this.get_canvas()).mouseup((tmp$2 = this , function(it){
         {
-          var tmp$0;
-          tmp$0 = tmp$2.get_selection() , tmp$0 != null?tmp$0.set_selected(false):null;
+          if (tmp$2.get_selection() != null) {
+            var tmp$0;
+            tmp$0 = tmp$2.get_selection() , tmp$0 != null?tmp$0.set_selected(false):null;
+            tmp$2.addShape(Kotlin.sure(tmp$2.get_selection()));
+          }
           tmp$2.set_selection(null);
           tmp$2.set_valid(false);
         }
@@ -219,7 +223,7 @@ var classes = function(){
   }
   , get_rightNeighbour:function(){
     var tmp$0;
-    if (this.get_i() < example.get_Image().get_piecesX() - 2)
+    if (this.get_i() < example.get_Image().get_piecesX() - 1)
       tmp$0 = example.get_Image().get_pieces()[this.get_i() + 1][this.get_j()];
     else 
       tmp$0 = null;
@@ -239,7 +243,7 @@ var classes = function(){
   }
   , get_bottomNeighbour:function(){
     var tmp$0;
-    if (this.get_j() < example.get_Image().get_piecesY() - 2)
+    if (this.get_j() < example.get_Image().get_piecesY() - 1)
       tmp$0 = example.get_Image().get_pieces()[this.get_i()][this.get_j() + 1];
     else 
       tmp$0 = null;
@@ -255,23 +259,32 @@ var classes = function(){
   , drawBorders:function(state){
     {
       var context = state.get_context();
-      context.strokeStyle = '#000000';
-      context.lineWidth = 4;
       var tmp$0;
-      if ((tmp$0 = this.get_leftNeighbour() , tmp$0 != null?tmp$0.get_bundle():null) != this.get_bundle()) {
-        util.strokeLine(context, Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()), Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()) + this.get_height());
+      util.drawing(context, (tmp$0 = this , function(){
+        {
+          tmp$0.setLineStyleFor(this, tmp$0.get_leftNeighbour());
+          util.strokeLine(this, Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()), Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height());
+          tmp$0.setLineStyleFor(this, tmp$0.get_rightNeighbour());
+          util.strokeLine(this, Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()), Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height());
+          tmp$0.setLineStyleFor(this, tmp$0.get_bottomNeighbour());
+          util.strokeLine(context, Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height(), Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()) + tmp$0.get_height());
+          tmp$0.setLineStyleFor(this, tmp$0.get_topNeighbour());
+          util.strokeLine(this, Math.floor(tmp$0.get_pos().get_x()), Math.floor(tmp$0.get_pos().get_y()), Math.floor(tmp$0.get_pos().get_x()) + tmp$0.get_width(), Math.floor(tmp$0.get_pos().get_y()));
+        }
       }
-      var tmp$1;
-      if ((tmp$1 = this.get_rightNeighbour() , tmp$1 != null?tmp$1.get_bundle():null) != this.get_bundle()) {
-        util.strokeLine(context, Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()), Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()) + this.get_height());
+      ));
+    }
+  }
+  , setLineStyleFor:function(receiver, neighbour){
+    {
+      var tmp$0;
+      if ((tmp$0 = neighbour , tmp$0 != null?tmp$0.get_bundle():null) == this.get_bundle()) {
+        receiver.strokeStyle = '#FFFFFF';
+        receiver.lineWidth = 2;
       }
-      var tmp$2;
-      if ((tmp$2 = this.get_bottomNeighbour() , tmp$2 != null?tmp$2.get_bundle():null) != this.get_bundle()) {
-        util.strokeLine(context, Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()) + this.get_height(), Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()) + this.get_height());
-      }
-      var tmp$3;
-      if ((tmp$3 = this.get_topNeighbour() , tmp$3 != null?tmp$3.get_bundle():null) != this.get_bundle()) {
-        util.strokeLine(context, Math.floor(this.get_pos().get_x()), Math.floor(this.get_pos().get_y()), Math.floor(this.get_pos().get_x()) + this.get_width(), Math.floor(this.get_pos().get_y()));
+       else {
+        receiver.strokeStyle = '#000000';
+        receiver.lineWidth = 4;
       }
     }
   }
@@ -511,51 +524,8 @@ var classes = function(){
   return {Piece:tmp$1, Shape:tmp$2, Bundle:tmp$3, Vector:tmp$4, CanvasState:tmp$0};
 }
 ();
-var kotlin = Kotlin.Namespace.create({initialize:function(){
-}
-, set:function(receiver, key, value){
-  {
-    return receiver.put(key, value);
-  }
-}
-}, {ranges:Kotlin.Namespace.create({initialize:function(){
-}
-, shuffled:function(receiver){
-  {
-    var ordered = new Kotlin.ArrayList;
-    var tmp$0;
-    var tmp$1;
-    var tmp$2;
-    var tmp$3;
-    {
-      tmp$0 = receiver , (tmp$1 = tmp$0.get_reversed()?-1:1 , (tmp$2 = tmp$0.get_start() , tmp$3 = tmp$0.get_end() + tmp$1));
-      for (var i = tmp$2; i != tmp$3; i += tmp$1) {
-        ordered.add(i);
-      }
-    }
-    return Kotlin.arrayFromFun(ordered.size(), function(it){
-      {
-        var randomValue = Math.floor((ordered.size() - 1) * Math.random());
-        var value = ordered.get(randomValue);
-        ordered.remove(value);
-        return value;
-      }
-    }
-    );
-  }
-}
-, reversed:function(receiver){
-  {
-    var result = new Kotlin.ArrayList;
-    var i = receiver.size();
-    while (i > 0) {
-      result.add(receiver.get(--i));
-    }
-    return result;
-  }
-}
-}, {})});
 var example = Kotlin.Namespace.create({initialize:function(){
+  this.$canvasState = new example.CanvasState(getCanvas());
   this.$Image = Kotlin.object.create({initialize:function(){
     this.$width = 1024;
     this.$height = 768;
@@ -615,13 +585,12 @@ var example = Kotlin.Namespace.create({initialize:function(){
     }
   }
   });
-  this.$canvasState = new example.CanvasState(getCanvas());
-}
-, get_Image:function(){
-  return this.$Image;
 }
 , get_canvasState:function(){
   return this.$canvasState;
+}
+, get_Image:function(){
+  return this.$Image;
 }
 , v$0:function(x, y){
   {
@@ -684,11 +653,60 @@ var util = Kotlin.Namespace.create({initialize:function(){
     receiver.stroke();
   }
 }
+, drawing:function(receiver, f){
+  {
+    f.call(receiver);
+  }
+}
 }, {});
+var kotlin = Kotlin.Namespace.create({initialize:function(){
+}
+, set:function(receiver, key, value){
+  {
+    return receiver.put(key, value);
+  }
+}
+}, {ranges:Kotlin.Namespace.create({initialize:function(){
+}
+, shuffled:function(receiver){
+  {
+    var ordered = new Kotlin.ArrayList;
+    var tmp$0;
+    var tmp$1;
+    var tmp$2;
+    var tmp$3;
+    {
+      tmp$0 = receiver , (tmp$1 = tmp$0.get_reversed()?-1:1 , (tmp$2 = tmp$0.get_start() , tmp$3 = tmp$0.get_end() + tmp$1));
+      for (var i = tmp$2; i != tmp$3; i += tmp$1) {
+        ordered.add(i);
+      }
+    }
+    return Kotlin.arrayFromFun(ordered.size(), function(it){
+      {
+        var randomValue = Math.floor((ordered.size() - 1) * Math.random());
+        var value = ordered.get(randomValue);
+        ordered.remove(value);
+        return value;
+      }
+    }
+    );
+  }
+}
+, reversed:function(receiver){
+  {
+    var result = new Kotlin.ArrayList;
+    var i = receiver.size();
+    while (i > 0) {
+      result.add(receiver.get(--i));
+    }
+    return result;
+  }
+}
+}, {})});
 kotlin.ranges.initialize();
-kotlin.initialize();
 example.initialize();
 util.initialize();
+kotlin.initialize();
 
 var args = [];
 example.main(args);
