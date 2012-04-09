@@ -1,5 +1,63 @@
 var classes = function(){
-  var tmp$0 = Kotlin.Class.create({initialize:function(canvas){
+  var tmp$0 = Kotlin.Class.create({initialize:function(x, y){
+    this.$x = x;
+    this.$y = y;
+  }
+  , get_x:function(){
+    return this.$x;
+  }
+  , get_y:function(){
+    return this.$y;
+  }
+  , plus:function(v){
+    {
+      return example.v(this.get_x() + v.get_x(), this.get_y() + v.get_y());
+    }
+  }
+  , minus:function(){
+    {
+      return example.v(-this.get_x(), -this.get_y());
+    }
+  }
+  , minus$0:function(v){
+    {
+      return example.v(this.get_x() - v.get_x(), this.get_y() - v.get_y());
+    }
+  }
+  , times:function(koef){
+    {
+      return example.v(this.get_x() * koef, this.get_y() * koef);
+    }
+  }
+  , distanceTo:function(v){
+    {
+      return Math.sqrt(this.minus$0(v).get_sqr());
+    }
+  }
+  , rotatedBy:function(theta){
+    {
+      var sin = Math.sin(theta);
+      var cos = Math.cos(theta);
+      return example.v(this.get_x() * cos - this.get_y() * sin, this.get_x() * sin + this.get_y() * cos);
+    }
+  }
+  , isInRect:function(topLeft, size){
+    {
+      return this.get_x() >= topLeft.get_x() && this.get_x() <= topLeft.get_x() + size.get_x() && this.get_y() >= topLeft.get_y() && this.get_y() <= topLeft.get_y() + size.get_y();
+    }
+  }
+  , get_sqr:function(){
+    {
+      return this.get_x() * this.get_x() + this.get_y() * this.get_y();
+    }
+  }
+  , get_normalized:function(){
+    {
+      return this.times(1 / Math.sqrt(this.get_sqr()));
+    }
+  }
+  });
+  var tmp$1 = Kotlin.Class.create({initialize:function(canvas){
     this.$canvas = canvas;
     this.$width = this.get_canvas().width;
     this.$height = this.get_canvas().height;
@@ -22,7 +80,7 @@ var classes = function(){
               var shape = tmp$0.next();
               {
                 if (shape.contains(mousePos)) {
-                  tmp$0_0.set_dragOff(mousePos.minus(shape.get_pos()));
+                  tmp$0_0.set_dragOff(mousePos.minus$0(shape.get_pos()));
                   shape.set_selected(true);
                   tmp$0_0.set_selection(shape);
                   tmp$0_0.removeShape(shape);
@@ -38,7 +96,7 @@ var classes = function(){
       $(this.get_canvas()).mousemove((tmp$1 = this , function(it){
         {
           if (tmp$1.get_selection() != null) {
-            Kotlin.sure(tmp$1.get_selection()).set_pos(tmp$1.mousePos_0(it).minus(tmp$1.get_dragOff()));
+            Kotlin.sure(tmp$1.get_selection()).set_pos(tmp$1.mousePos_0(it).minus$0(tmp$1.get_dragOff()));
             tmp$1.set_valid(false);
           }
         }
@@ -71,7 +129,7 @@ var classes = function(){
   }
   , get_size:function(){
     {
-      return example.v(this.get_width(), this.get_height());
+      return example.v$0(this.get_width(), this.get_height());
     }
   }
   , get_context:function(){
@@ -110,7 +168,7 @@ var classes = function(){
         offset = offset.plus(new example.Vector(el.offsetLeft, el.offsetTop));
         element = el.offsetParent;
       }
-      return (new example.Vector(e.pageX, e.pageY)).minus(offset);
+      return (new example.Vector(e.pageX, e.pageY)).minus$0(offset);
     }
   }
   , addShape:function(shape){
@@ -166,7 +224,7 @@ var classes = function(){
     }
   }
   });
-  var tmp$1 = Kotlin.Class.create({initialize:function(x, y){
+  var tmp$2 = Kotlin.Class.create({initialize:function(x, y){
     this.$x = x;
     this.$y = y;
     this.$all = new Kotlin.ArrayList;
@@ -204,14 +262,161 @@ var classes = function(){
     }
   }
   });
-  var tmp$2 = Kotlin.Class.create({initialize:function(i, j, startingPos, imageX, imageY, width, height){
+  var tmp$3 = Kotlin.Class.create({initialize:function(){
+    this.$selected_0 = false;
+  }
+  , draw:function(state){
+  }
+  , contains:function(mousePos){
+  }
+  , get_pos:function(){
+    return this.$pos;
+  }
+  , set_pos:function(tmp$0){
+    this.$pos = tmp$0;
+  }
+  , get_selected:function(){
+    return this.$selected_0;
+  }
+  , set_selected:function(tmp$0){
+    this.$selected_0 = tmp$0;
+  }
+  });
+  var tmp$4 = Kotlin.Class.create(tmp$3, {initialize:function(mainPiece){
+    this.$mainPiece = mainPiece;
+    this.super_init();
+    this.$selected = false;
+    this.$pieces = new Kotlin.ArrayList;
+    {
+      this.get_pieces().add(this.get_mainPiece());
+    }
+  }
+  , get_mainPiece:function(){
+    return this.$mainPiece;
+  }
+  , contains:function(mousePos){
+    {
+      var tmp$0;
+      {
+        tmp$0 = this.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            if (piece.contains(mousePos)) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
+  }
+  , get_pos:function(){
+    {
+      return this.get_mainPiece().get_pos();
+    }
+  }
+  , set_pos:function(newPos){
+    {
+      var delta = newPos.minus$0(this.get_pos());
+      var tmp$0;
+      {
+        tmp$0 = this.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            piece.set_pos(piece.get_pos().plus(delta));
+          }
+        }
+      }
+    }
+  }
+  , get_selected:function(){
+    return this.$selected;
+  }
+  , set_selected:function(newVal){
+    {
+      this.$selected = newVal;
+      if (!this.get_selected()) {
+        var tmp$0;
+        {
+          tmp$0 = this.get_pieces().iterator();
+          while (tmp$0.hasNext()) {
+            var piece = tmp$0.next();
+            {
+              this.mergeNeighbours(piece);
+            }
+          }
+        }
+      }
+    }
+  }
+  , mergeNeighbours:function(piece){
+    {
+      var tmp$0;
+      {
+        tmp$0 = piece.neighbours().iterator();
+        while (tmp$0.hasNext()) {
+          var neighbour = tmp$0.next();
+          {
+            if (neighbour == null) {
+              continue;
+            }
+            var alignDelta = piece.alignDelta(neighbour);
+            if (alignDelta.get_sqr() < 60) {
+              if (neighbour.get_bundle() != this) {
+                this.merge(neighbour.get_bundle(), alignDelta);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  , draw:function(state){
+    {
+      var tmp$0;
+      {
+        tmp$0 = this.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            piece.drawImagePart(state);
+            piece.drawBorders(state);
+          }
+        }
+      }
+    }
+  }
+  , get_pieces:function(){
+    return this.$pieces;
+  }
+  , merge:function(otherBundle, alignDelta){
+    {
+      var tmp$0;
+      {
+        tmp$0 = otherBundle.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            this.get_pieces().add(piece);
+            piece.set_bundle(this);
+            piece.set_pos(piece.get_pos().minus$0(alignDelta));
+          }
+        }
+      }
+      example.get_canvasState().removeShape(otherBundle);
+    }
+  }
+  });
+  var tmp$5 = Kotlin.Class.create({initialize:function(i, j, startingPos, imageX, imageY, width, height){
     this.$i = i;
     this.$j = j;
     this.$imageX = imageX;
     this.$imageY = imageY;
     this.$width = width;
     this.$height = height;
-    this.$shadowOffset = example.v$0(-4, 4);
+    this.$shadowOffset = example.v(-4, 4);
     this.$pos = startingPos;
     this.$bundle = new example.Bundle(this);
   }
@@ -297,7 +502,7 @@ var classes = function(){
   }
   , contains:function(mousePos){
     {
-      return mousePos.isInRect(this.get_pos(), example.v$0(this.get_width(), this.get_height()));
+      return mousePos.isInRect(this.get_pos(), example.v(this.get_width(), this.get_height()));
     }
   }
   , drawBorders:function(state){
@@ -367,7 +572,7 @@ var classes = function(){
   }
   , get_indexVector:function(){
     {
-      return example.v(this.get_i(), this.get_j());
+      return example.v$0(this.get_i(), this.get_j());
     }
   }
   , neighbours:function(){
@@ -382,220 +587,35 @@ var classes = function(){
   }
   , alignDelta:function(otherPiece){
     {
-      var imageDistance = otherPiece.get_indexVector().minus(this.get_indexVector()).times(example.get_Image().get_pieceSize());
-      var realDistance = otherPiece.get_pos().minus(this.$pos);
-      return realDistance.minus(imageDistance);
+      var imageDistance = otherPiece.get_indexVector().minus$0(this.get_indexVector()).times(example.get_Image().get_pieceSize());
+      var realDistance = otherPiece.get_pos().minus$0(this.$pos);
+      return realDistance.minus$0(imageDistance);
     }
   }
   });
-  var tmp$3 = Kotlin.Class.create({initialize:function(){
-    this.$selected_0 = false;
-  }
-  , draw:function(state){
-  }
-  , contains:function(mousePos){
-  }
-  , get_pos:function(){
-    return this.$pos;
-  }
-  , set_pos:function(tmp$0){
-    this.$pos = tmp$0;
-  }
-  , get_selected:function(){
-    return this.$selected_0;
-  }
-  , set_selected:function(tmp$0){
-    this.$selected_0 = tmp$0;
-  }
-  });
-  var tmp$4 = Kotlin.Class.create(tmp$3, {initialize:function(mainPiece){
-    this.$mainPiece = mainPiece;
-    this.super_init();
-    this.$selected = false;
-    this.$pieces = new Kotlin.ArrayList;
-    {
-      this.get_pieces().add(this.get_mainPiece());
-    }
-  }
-  , get_mainPiece:function(){
-    return this.$mainPiece;
-  }
-  , contains:function(mousePos){
-    {
-      var tmp$0;
-      {
-        tmp$0 = this.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            if (piece.contains(mousePos)) {
-              return true;
-            }
-          }
-        }
-      }
-      return false;
-    }
-  }
-  , get_pos:function(){
-    {
-      return this.get_mainPiece().get_pos();
-    }
-  }
-  , set_pos:function(newPos){
-    {
-      var delta = newPos.minus(this.get_pos());
-      var tmp$0;
-      {
-        tmp$0 = this.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            piece.set_pos(piece.get_pos().plus(delta));
-          }
-        }
-      }
-    }
-  }
-  , get_selected:function(){
-    return this.$selected;
-  }
-  , set_selected:function(newVal){
-    {
-      this.$selected = newVal;
-      if (!this.get_selected()) {
-        var tmp$0;
-        {
-          tmp$0 = this.get_pieces().iterator();
-          while (tmp$0.hasNext()) {
-            var piece = tmp$0.next();
-            {
-              this.mergeNeighbours(piece);
-            }
-          }
-        }
-      }
-    }
-  }
-  , mergeNeighbours:function(piece){
-    {
-      var tmp$0;
-      {
-        tmp$0 = piece.neighbours().iterator();
-        while (tmp$0.hasNext()) {
-          var neighbour = tmp$0.next();
-          {
-            if (neighbour == null) {
-              continue;
-            }
-            var alignDelta = piece.alignDelta(neighbour);
-            if (alignDelta.get_sqr() < 60) {
-              if (neighbour.get_bundle() != this) {
-                this.merge(neighbour.get_bundle(), alignDelta);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  , draw:function(state){
-    {
-      var tmp$0;
-      {
-        tmp$0 = this.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            piece.drawImagePart(state);
-            piece.drawBorders(state);
-          }
-        }
-      }
-    }
-  }
-  , get_pieces:function(){
-    return this.$pieces;
-  }
-  , merge:function(otherBundle, alignDelta){
-    {
-      var tmp$0;
-      {
-        tmp$0 = otherBundle.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            this.get_pieces().add(piece);
-            piece.set_bundle(this);
-            piece.set_pos(piece.get_pos().minus(alignDelta));
-          }
-        }
-      }
-      example.get_canvasState().removeShape(otherBundle);
-    }
-  }
-  });
-  var tmp$5 = Kotlin.Class.create({initialize:function(x, y){
-    this.$x = x;
-    this.$y = y;
-  }
-  , get_x:function(){
-    return this.$x;
-  }
-  , get_y:function(){
-    return this.$y;
-  }
-  , plus:function(v){
-    {
-      return example.v$0(this.get_x() + v.get_x(), this.get_y() + v.get_y());
-    }
-  }
-  , minus$0:function(){
-    {
-      return example.v$0(-this.get_x(), -this.get_y());
-    }
-  }
-  , minus:function(v){
-    {
-      return example.v$0(this.get_x() - v.get_x(), this.get_y() - v.get_y());
-    }
-  }
-  , times:function(koef){
-    {
-      return example.v$0(this.get_x() * koef, this.get_y() * koef);
-    }
-  }
-  , distanceTo:function(v){
-    {
-      return Math.sqrt(this.minus(v).get_sqr());
-    }
-  }
-  , rotatedBy:function(theta){
-    {
-      var sin = Math.sin(theta);
-      var cos = Math.cos(theta);
-      return example.v$0(this.get_x() * cos - this.get_y() * sin, this.get_x() * sin + this.get_y() * cos);
-    }
-  }
-  , isInRect:function(topLeft, size){
-    {
-      return this.get_x() >= topLeft.get_x() && this.get_x() <= topLeft.get_x() + size.get_x() && this.get_y() >= topLeft.get_y() && this.get_y() <= topLeft.get_y() + size.get_y();
-    }
-  }
-  , get_sqr:function(){
-    {
-      return this.get_x() * this.get_x() + this.get_y() * this.get_y();
-    }
-  }
-  , get_normalized:function(){
-    {
-      return this.times(1 / Math.sqrt(this.get_sqr()));
-    }
-  }
-  });
-  return {Vector:tmp$5, Shuffler:tmp$1, Piece:tmp$2, Shape:tmp$3, Bundle:tmp$4, CanvasState:tmp$0};
+  return {Piece:tmp$5, CanvasState:tmp$1, Shuffler:tmp$2, Shape:tmp$3, Bundle:tmp$4, Vector:tmp$0};
 }
 ();
+var kotlin = Kotlin.Namespace.create({initialize:function(){
+}
+, set:function(receiver, key, value){
+  {
+    return receiver.put(key, value);
+  }
+}
+}, {ranges:Kotlin.Namespace.create({initialize:function(){
+}
+, reversed:function(receiver){
+  {
+    var result = new Kotlin.ArrayList;
+    var i = receiver.size();
+    while (i > 0) {
+      result.add(receiver.get(--i));
+    }
+    return result;
+  }
+}
+}, {})});
 var util = Kotlin.Namespace.create({initialize:function(){
 }
 , shadowed:function(receiver, shadowOffset, alpha, render){
@@ -631,28 +651,7 @@ var util = Kotlin.Namespace.create({initialize:function(){
   }
 }
 }, {});
-var kotlin = Kotlin.Namespace.create({initialize:function(){
-}
-, set:function(receiver, key, value){
-  {
-    return receiver.put(key, value);
-  }
-}
-}, {ranges:Kotlin.Namespace.create({initialize:function(){
-}
-, reversed:function(receiver){
-  {
-    var result = new Kotlin.ArrayList;
-    var i = receiver.size();
-    while (i > 0) {
-      result.add(receiver.get(--i));
-    }
-    return result;
-  }
-}
-}, {})});
 var example = Kotlin.Namespace.create({initialize:function(){
-  this.$canvasState = new example.CanvasState(getCanvas());
   this.$Image = Kotlin.object.create({initialize:function(){
     this.$width = 1024;
     this.$height = 768;
@@ -698,7 +697,7 @@ var example = Kotlin.Namespace.create({initialize:function(){
           return Kotlin.arrayFromFun(tmp$0_0.get_piecesY(), (tmp$0 = tmp$0_0 , function(y){
             {
               var xy = shuffler.getNextPair();
-              var imagePiece = new example.Piece(x, y, example.v(xy[0] * tmp$0.get_pieceSize(), xy[1] * tmp$0.get_pieceSize()), x * tmp$0.get_pieceSize(), y * tmp$0.get_pieceSize(), tmp$0.get_pieceSize(), tmp$0.get_pieceSize());
+              var imagePiece = new example.Piece(x, y, example.v$0(xy[0] * tmp$0.get_pieceSize(), xy[1] * tmp$0.get_pieceSize()), x * tmp$0.get_pieceSize(), y * tmp$0.get_pieceSize(), tmp$0.get_pieceSize(), tmp$0.get_pieceSize());
               tmp$0.get_piecesList().add(imagePiece);
               return imagePiece;
             }
@@ -710,22 +709,7 @@ var example = Kotlin.Namespace.create({initialize:function(){
     }
   }
   });
-}
-, get_canvasState:function(){
-  return this.$canvasState;
-}
-, get_Image:function(){
-  return this.$Image;
-}
-, v$0:function(x, y){
-  {
-    return new example.Vector(x, y);
-  }
-}
-, v:function(x, y){
-  {
-    return new example.Vector(x, y);
-  }
+  this.$canvasState = new example.CanvasState(getCanvas());
 }
 , main:function(args){
   {
@@ -748,10 +732,26 @@ var example = Kotlin.Namespace.create({initialize:function(){
     , 1000);
   }
 }
-}, {Vector:classes.Vector, Bundle:classes.Bundle, Shape:classes.Shape, Piece:classes.Piece, Shuffler:classes.Shuffler, CanvasState:classes.CanvasState});
-util.initialize();
-kotlin.ranges.initialize();
+, get_Image:function(){
+  return this.$Image;
+}
+, get_canvasState:function(){
+  return this.$canvasState;
+}
+, v:function(x, y){
+  {
+    return new example.Vector(x, y);
+  }
+}
+, v$0:function(x, y){
+  {
+    return new example.Vector(x, y);
+  }
+}
+}, {Piece:classes.Piece, Shape:classes.Shape, Shuffler:classes.Shuffler, CanvasState:classes.CanvasState, Bundle:classes.Bundle, Vector:classes.Vector});
 kotlin.initialize();
+kotlin.ranges.initialize();
+util.initialize();
 example.initialize();
 
 var args = [];

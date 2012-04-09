@@ -3,11 +3,10 @@ package example
 import html5.HTMLImageElement
 import html5.getImage
 import java.util.ArrayList
-import js.*
 
 object Image {
     val data : HTMLImageElement
-    get() = getImage("Penguins.jpg")
+        get() = getImage("Penguins.jpg")
     val width = 1024
     val height = 768
     val piecesX = 8

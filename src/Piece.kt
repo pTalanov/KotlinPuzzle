@@ -12,19 +12,18 @@ class Piece(val i : Int, val j : Int,
     val shadowOffset = v(- 4.0, 4.0)
 
     var pos : Vector = startingPos
-    get() = if (bundle.selected) $pos else $pos + shadowOffset
-
+        get() = if (bundle.selected) $pos else $pos + shadowOffset
 
     var bundle : Bundle = Bundle(this)
 
     val leftNeighbour : Piece?
-    get() = if (i > 0) Image.pieces[i - 1][j] else null
+        get() = if (i > 0) Image.pieces[i - 1][j] else null
     val rightNeighbour : Piece?
-    get() = if (i < Image.piecesX - 1) Image.pieces[i + 1][j] else null
+        get() = if (i < Image.piecesX - 1) Image.pieces[i + 1][j] else null
     val topNeighbour : Piece?
-    get() = if (j > 0) Image.pieces[i][j - 1] else null
+        get() = if (j > 0) Image.pieces[i][j - 1] else null
     val bottomNeighbour : Piece?
-    get() = if (j < Image.piecesY - 1) Image.pieces[i][j + 1] else null
+        get() = if (j < Image.piecesY - 1) Image.pieces[i][j + 1] else null
 
     fun contains(mousePos : Vector) : Boolean = mousePos.isInRect(pos, v(width.toDouble(), height.toDouble()))
 
@@ -78,7 +77,7 @@ class Piece(val i : Int, val j : Int,
     }
 
     val indexVector : Vector
-    get() = v(i, j)
+        get() = v(i, j)
 
     fun neighbours() : List<Piece?> {
         val result = ArrayList<Piece?>()

@@ -1,7 +1,5 @@
 package example
 
-import js.*
-
 fun v(x : Double, y : Double) = Vector(x, y)
 fun v(x : Int, y : Int) = Vector(x.toDouble(), y.toDouble())
 
@@ -21,7 +19,7 @@ class Vector(val x : Double = 0.0, val y : Double = 0.0) {
     (y >= topLeft.y) && (y <= topLeft.y + size.y)
 
     val sqr : Double
-    get() = x * x + y * y
+        get() = x * x + y * y
     val normalized : Vector
-    get() = this * (1.0 / Math.sqrt(sqr))
+        get() = this * (1.0 / Math.sqrt(sqr))
 }
