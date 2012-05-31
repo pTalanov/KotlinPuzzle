@@ -1,5 +1,43 @@
 var classes = function(){
-  var tmp$0 = Kotlin.Class.create({initialize:function(i, j, startingPos, imageX, imageY, width, height){
+  var tmp$0 = Kotlin.Class.create({initialize:function(x, y){
+    this.$x = x;
+    this.$y = y;
+    this.$all = new Kotlin.ArrayList;
+    {
+      var tmp$0;
+      {
+        tmp$0 = this.get_x() - 1 + 1;
+        for (var i = 0; i != tmp$0; ++i) {
+          var tmp$1;
+          {
+            tmp$1 = this.get_y() - 1 + 1;
+            for (var j = 0; j != tmp$1; ++j) {
+              this.get_all().add([i, j]);
+            }
+          }
+        }
+      }
+    }
+  }
+  , get_x:function(){
+    return this.$x;
+  }
+  , get_y:function(){
+    return this.$y;
+  }
+  , get_all:function(){
+    return this.$all;
+  }
+  , getNextPair:function(){
+    {
+      var randomValue = Math.floor((this.get_all().size() - 1) * Math.random());
+      var value = this.get_all().get(randomValue);
+      this.get_all().remove(value);
+      return value;
+    }
+  }
+  });
+  var tmp$1 = Kotlin.Class.create({initialize:function(i, j, startingPos, imageX, imageY, width, height){
     this.$i = i;
     this.$j = j;
     this.$imageX = imageX;
@@ -183,25 +221,9 @@ var classes = function(){
     }
   }
   });
-  var tmp$1 = Kotlin.Class.create({initialize:function(x, y){
+  var tmp$2 = Kotlin.Class.create({initialize:function(x, y){
     this.$x = x;
     this.$y = y;
-    this.$all = new Kotlin.ArrayList;
-    {
-      var tmp$0;
-      {
-        tmp$0 = this.get_x() - 1 + 1;
-        for (var i = 0; i != tmp$0; ++i) {
-          var tmp$1;
-          {
-            tmp$1 = this.get_y() - 1 + 1;
-            for (var j = 0; j != tmp$1; ++j) {
-              this.get_all().add([i, j]);
-            }
-          }
-        }
-      }
-    }
   }
   , get_x:function(){
     return this.$x;
@@ -209,166 +231,55 @@ var classes = function(){
   , get_y:function(){
     return this.$y;
   }
-  , get_all:function(){
-    return this.$all;
-  }
-  , getNextPair:function(){
+  , plus:function(v){
     {
-      var randomValue = Math.floor((this.get_all().size() - 1) * Math.random());
-      var value = this.get_all().get(randomValue);
-      this.get_all().remove(value);
-      return value;
+      return example.v(this.get_x() + v.get_x(), this.get_y() + v.get_y());
+    }
+  }
+  , minus$0:function(){
+    {
+      return example.v(-this.get_x(), -this.get_y());
+    }
+  }
+  , minus:function(v){
+    {
+      return example.v(this.get_x() - v.get_x(), this.get_y() - v.get_y());
+    }
+  }
+  , times:function(koef){
+    {
+      return example.v(this.get_x() * koef, this.get_y() * koef);
+    }
+  }
+  , distanceTo:function(v){
+    {
+      return Math.sqrt(this.minus(v).get_sqr());
+    }
+  }
+  , rotatedBy:function(theta){
+    {
+      var sin = Math.sin(theta);
+      var cos = Math.cos(theta);
+      return example.v(this.get_x() * cos - this.get_y() * sin, this.get_x() * sin + this.get_y() * cos);
+    }
+  }
+  , isInRect:function(topLeft, size){
+    {
+      return this.get_x() >= topLeft.get_x() && this.get_x() <= topLeft.get_x() + size.get_x() && this.get_y() >= topLeft.get_y() && this.get_y() <= topLeft.get_y() + size.get_y();
+    }
+  }
+  , get_sqr:function(){
+    {
+      return this.get_x() * this.get_x() + this.get_y() * this.get_y();
+    }
+  }
+  , get_normalized:function(){
+    {
+      return this.times(1 / Math.sqrt(this.get_sqr()));
     }
   }
   });
-  var tmp$2 = Kotlin.Class.create({initialize:function(){
-    this.$selected_0 = false;
-  }
-  , draw:function(state){
-  }
-  , contains:function(mousePos){
-  }
-  , get_pos:function(){
-    return this.$pos;
-  }
-  , set_pos:function(tmp$0){
-    this.$pos = tmp$0;
-  }
-  , get_selected:function(){
-    return this.$selected_0;
-  }
-  , set_selected:function(tmp$0){
-    this.$selected_0 = tmp$0;
-  }
-  });
-  var tmp$3 = Kotlin.Class.create(tmp$2, {initialize:function(mainPiece){
-    this.$mainPiece = mainPiece;
-    this.super_init();
-    this.$selected = false;
-    this.$pieces = new Kotlin.ArrayList;
-    {
-      this.get_pieces().add(this.get_mainPiece());
-    }
-  }
-  , get_mainPiece:function(){
-    return this.$mainPiece;
-  }
-  , contains:function(mousePos){
-    {
-      var tmp$0;
-      {
-        tmp$0 = this.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            if (piece.contains(mousePos)) {
-              return true;
-            }
-          }
-        }
-      }
-      return false;
-    }
-  }
-  , get_pos:function(){
-    {
-      return this.get_mainPiece().get_pos();
-    }
-  }
-  , set_pos:function(newPos){
-    {
-      var delta = newPos.minus(this.get_pos());
-      var tmp$0;
-      {
-        tmp$0 = this.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            piece.set_pos(piece.get_pos().plus(delta));
-          }
-        }
-      }
-    }
-  }
-  , get_selected:function(){
-    return this.$selected;
-  }
-  , set_selected:function(newVal){
-    {
-      this.$selected = newVal;
-      if (!this.get_selected()) {
-        var tmp$0;
-        {
-          tmp$0 = this.get_pieces().iterator();
-          while (tmp$0.hasNext()) {
-            var piece = tmp$0.next();
-            {
-              this.mergeNeighbours(piece);
-            }
-          }
-        }
-      }
-    }
-  }
-  , mergeNeighbours:function(piece){
-    {
-      var tmp$0;
-      {
-        tmp$0 = piece.neighbours().iterator();
-        while (tmp$0.hasNext()) {
-          var neighbour = tmp$0.next();
-          {
-            if (neighbour == null) {
-              continue;
-            }
-            var alignDelta = piece.alignDelta(neighbour);
-            if (alignDelta.get_sqr() < 60) {
-              if (neighbour.get_bundle() != this) {
-                this.merge(neighbour.get_bundle(), alignDelta);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  , draw:function(state){
-    {
-      var tmp$0;
-      {
-        tmp$0 = this.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            piece.drawImagePart(state);
-            piece.drawBorders(state);
-          }
-        }
-      }
-    }
-  }
-  , get_pieces:function(){
-    return this.$pieces;
-  }
-  , merge:function(otherBundle, alignDelta){
-    {
-      var tmp$0;
-      {
-        tmp$0 = otherBundle.get_pieces().iterator();
-        while (tmp$0.hasNext()) {
-          var piece = tmp$0.next();
-          {
-            this.get_pieces().add(piece);
-            piece.set_bundle(this);
-            piece.set_pos(piece.get_pos().minus(alignDelta));
-          }
-        }
-      }
-      example.get_canvasState().removeShape(otherBundle);
-    }
-  }
-  });
-  var tmp$4 = Kotlin.Class.create({initialize:function(canvas){
+  var tmp$3 = Kotlin.Class.create({initialize:function(canvas){
     this.$canvas = canvas;
     this.$width = this.get_canvas().width;
     this.$height = this.get_canvas().height;
@@ -535,65 +446,154 @@ var classes = function(){
     }
   }
   });
-  var tmp$5 = Kotlin.Class.create({initialize:function(x, y){
-    this.$x = x;
-    this.$y = y;
+  var tmp$4 = Kotlin.Class.create({initialize:function(){
+    this.$selected_0 = false;
   }
-  , get_x:function(){
-    return this.$x;
+  , draw:function(state){
   }
-  , get_y:function(){
-    return this.$y;
+  , contains:function(mousePos){
   }
-  , plus:function(v){
+  , get_pos:function(){
+    return this.$pos;
+  }
+  , set_pos:function(tmp$0){
+    this.$pos = tmp$0;
+  }
+  , get_selected:function(){
+    return this.$selected_0;
+  }
+  , set_selected:function(tmp$0){
+    this.$selected_0 = tmp$0;
+  }
+  });
+  var tmp$5 = Kotlin.Class.create(tmp$4, {initialize:function(mainPiece){
+    this.$mainPiece = mainPiece;
+    this.super_init();
+    this.$selected = false;
+    this.$pieces = new Kotlin.ArrayList;
     {
-      return example.v(this.get_x() + v.get_x(), this.get_y() + v.get_y());
+      this.get_pieces().add(this.get_mainPiece());
     }
   }
-  , minus$0:function(){
+  , get_mainPiece:function(){
+    return this.$mainPiece;
+  }
+  , contains:function(mousePos){
     {
-      return example.v(-this.get_x(), -this.get_y());
+      var tmp$0;
+      {
+        tmp$0 = this.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            if (piece.contains(mousePos)) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
     }
   }
-  , minus:function(v){
+  , get_pos:function(){
     {
-      return example.v(this.get_x() - v.get_x(), this.get_y() - v.get_y());
+      return this.get_mainPiece().get_pos();
     }
   }
-  , times:function(koef){
+  , set_pos:function(newPos){
     {
-      return example.v(this.get_x() * koef, this.get_y() * koef);
+      var delta = newPos.minus(this.get_pos());
+      var tmp$0;
+      {
+        tmp$0 = this.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            piece.set_pos(piece.get_pos().plus(delta));
+          }
+        }
+      }
     }
   }
-  , distanceTo:function(v){
+  , get_selected:function(){
+    return this.$selected;
+  }
+  , set_selected:function(newVal){
     {
-      return Math.sqrt(this.minus(v).get_sqr());
+      this.$selected = newVal;
+      if (!this.get_selected()) {
+        var tmp$0;
+        {
+          tmp$0 = this.get_pieces().iterator();
+          while (tmp$0.hasNext()) {
+            var piece = tmp$0.next();
+            {
+              this.mergeNeighbours(piece);
+            }
+          }
+        }
+      }
     }
   }
-  , rotatedBy:function(theta){
+  , mergeNeighbours:function(piece){
     {
-      var sin = Math.sin(theta);
-      var cos = Math.cos(theta);
-      return example.v(this.get_x() * cos - this.get_y() * sin, this.get_x() * sin + this.get_y() * cos);
+      var tmp$0;
+      {
+        tmp$0 = piece.neighbours().iterator();
+        while (tmp$0.hasNext()) {
+          var neighbour = tmp$0.next();
+          {
+            if (neighbour == null) {
+              continue;
+            }
+            var alignDelta = piece.alignDelta(neighbour);
+            if (alignDelta.get_sqr() < 60) {
+              if (neighbour.get_bundle() != this) {
+                this.merge(neighbour.get_bundle(), alignDelta);
+              }
+            }
+          }
+        }
+      }
     }
   }
-  , isInRect:function(topLeft, size){
+  , draw:function(state){
     {
-      return this.get_x() >= topLeft.get_x() && this.get_x() <= topLeft.get_x() + size.get_x() && this.get_y() >= topLeft.get_y() && this.get_y() <= topLeft.get_y() + size.get_y();
+      var tmp$0;
+      {
+        tmp$0 = this.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            piece.drawImagePart(state);
+            piece.drawBorders(state);
+          }
+        }
+      }
     }
   }
-  , get_sqr:function(){
-    {
-      return this.get_x() * this.get_x() + this.get_y() * this.get_y();
-    }
+  , get_pieces:function(){
+    return this.$pieces;
   }
-  , get_normalized:function(){
+  , merge:function(otherBundle, alignDelta){
     {
-      return this.times(1 / Math.sqrt(this.get_sqr()));
+      var tmp$0;
+      {
+        tmp$0 = otherBundle.get_pieces().iterator();
+        while (tmp$0.hasNext()) {
+          var piece = tmp$0.next();
+          {
+            this.get_pieces().add(piece);
+            piece.set_bundle(this);
+            piece.set_pos(piece.get_pos().minus(alignDelta));
+          }
+        }
+      }
+      example.get_canvasState().removeShape(otherBundle);
     }
   }
   });
-  return {Vector:tmp$5, Shuffler:tmp$1, Shape:tmp$2, Bundle:tmp$3, CanvasState:tmp$4, Piece:tmp$0};
+  return {Bundle:tmp$5, Piece:tmp$1, Vector:tmp$2, CanvasState:tmp$3, Shape:tmp$4, Shuffler:tmp$0};
 }
 ();
 var util = Kotlin.Namespace.create({initialize:function(){
@@ -631,28 +631,6 @@ var util = Kotlin.Namespace.create({initialize:function(){
   }
 }
 }, {});
-var kotlin = Kotlin.Namespace.create({initialize:function(){
-}
-, set:function(receiver, key, value){
-  {
-    return receiver.put(key, value);
-  }
-}
-}, {ranges:Kotlin.Namespace.create({initialize:function(){
-}
-, reversed:function(receiver){
-  {
-    var result = new Kotlin.ArrayList;
-    var i = receiver.size();
-    while (i > 0) {
-      result.add(receiver.get(--i));
-    }
-    return result;
-  }
-}
-}, {}), browser:Kotlin.Namespace.create({initialize:function(){
-}
-}, {})});
 var example = Kotlin.Namespace.create({initialize:function(){
   this.$canvasState = new example.CanvasState(example.get_canvas());
   this.$Image = Kotlin.object.create({initialize:function(){
@@ -719,6 +697,14 @@ var example = Kotlin.Namespace.create({initialize:function(){
   }
   });
 }
+, get_canvas:function(){
+  {
+    return window.document.getElementsByTagName('canvas').item(0) != null?window.document.getElementsByTagName('canvas').item(0):Kotlin.throwNPE();
+  }
+}
+, get_canvasState:function(){
+  return this.$canvasState;
+}
 , v:function(x, y){
   {
     return new example.Vector(x, y);
@@ -728,24 +714,6 @@ var example = Kotlin.Namespace.create({initialize:function(){
   {
     return new example.Vector(x, y);
   }
-}
-, get_canvas:function(){
-  {
-    return window.document.getElementsByTagName('canvas').item(0) != null?window.document.getElementsByTagName('canvas').item(0):Kotlin.throwNPE();
-  }
-}
-, get_canvasState:function(){
-  return this.$canvasState;
-}
-, getImage:function(path){
-  {
-    var image = window.document.createElement('img');
-    image.src = path;
-    return image;
-  }
-}
-, get_Image:function(){
-  return this.$Image;
 }
 , main:function(args){
   {
@@ -768,9 +736,41 @@ var example = Kotlin.Namespace.create({initialize:function(){
     , 1000);
   }
 }
-}, {Bundle:classes.Bundle, Vector:classes.Vector, CanvasState:classes.CanvasState, Shape:classes.Shape, Shuffler:classes.Shuffler, Piece:classes.Piece});
+, getImage:function(path){
+  {
+    var image = window.document.createElement('img');
+    image.src = path;
+    return image;
+  }
+}
+, get_Image:function(){
+  return this.$Image;
+}
+}, {Shape:classes.Shape, CanvasState:classes.CanvasState, Vector:classes.Vector, Piece:classes.Piece, Bundle:classes.Bundle, Shuffler:classes.Shuffler});
+var kotlin = Kotlin.Namespace.create({initialize:function(){
+}
+, set:function(receiver, key, value){
+  {
+    return receiver.put(key, value);
+  }
+}
+}, {browser:Kotlin.Namespace.create({initialize:function(){
+}
+}, {}), ranges:Kotlin.Namespace.create({initialize:function(){
+}
+, reversed:function(receiver){
+  {
+    var result = new Kotlin.ArrayList;
+    var i = receiver.size();
+    while (i > 0) {
+      result.add(receiver.get(--i));
+    }
+    return result;
+  }
+}
+}, {})});
 util.initialize();
+example.initialize();
 kotlin.ranges.initialize();
 kotlin.initialize();
-example.initialize();
 
