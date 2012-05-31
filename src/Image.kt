@@ -1,22 +1,28 @@
 package example
 
-import html5.HTMLImageElement
-import html5.getImage
 import java.util.ArrayList
+import js.dom.html.HTMLImageElement
+import js.dom.html.window
+
+fun getImage(path: String): HTMLImageElement {
+    val image = window.document.createElement("img") as HTMLImageElement
+    image.src = path
+    return image
+}
 
 object Image {
-    val data : HTMLImageElement
+    val data: HTMLImageElement
         get() = getImage("Penguins.jpg")
     val width = 1024
     val height = 768
     val piecesX = 8
     val piecesY = 6
-    val piecesList = ArrayList<Piece>
+    val piecesList = ArrayList<Piece>()
     val pieceSize = width / piecesX
-    val pieces : Array<Array<Piece>> = splitInPieces()
+    val pieces: Array<Array<Piece>> = splitInPieces()
 
 
-    fun splitInPieces() : Array<Array<Piece>> {
+    fun splitInPieces(): Array<Array<Piece>> {
         val shuffler = Shuffler(piecesX, piecesY)
         return  Array(piecesX) {
         x ->
@@ -34,7 +40,7 @@ object Image {
     }
 }
 
-class Shuffler(val x : Int, val y : Int) {
+class Shuffler(val x: Int, val y: Int) {
     val all = ArrayList<#(Int, Int)>();
     {
         for (i in 0..x - 1) {
@@ -44,7 +50,7 @@ class Shuffler(val x : Int, val y : Int) {
         }
     }
 
-    fun getNextPair() : #(Int, Int) {
+    fun getNextPair(): #(Int, Int) {
         val randomValue = Math.floor((all.size() - 1) * Math.random())
         val value = all[randomValue]
         all.remove(value : Any?)

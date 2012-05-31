@@ -1,11 +1,13 @@
 package example
 
-fun main(args : Array<String>) {
+import js.dom.html.window
+
+fun main(args: Array<String>) {
     val pieces = Image.piecesList
     for (piece in pieces) {
         canvasState.addShape(piece.bundle)
     }
-    setInterval({
+    window.setInterval({
         canvasState.valid = false
     }, 1000)
 }

@@ -1,24 +1,27 @@
 package example
 
-import html5.Canvas
-import html5.getCanvas
-import html5.getContext
 import java.util.ArrayList
-import jquery.MouseEvent
-import jquery.jq
-import js.DomElement
-import js.setInterval
+import js.dom.html.HTMLElement
+import js.dom.html.window
+import js.dom.html5.HTMLCanvasElement
+import js.jquery.*
 import kotlin.ranges.reversed
 
-class CanvasState(val canvas : Canvas) {
+val canvas: HTMLCanvasElement
+    get() {
+        return window.document.getElementsByTagName("canvas").item(0)!! as HTMLCanvasElement
+    }
+
+
+class CanvasState(val canvas: HTMLCanvasElement) {
     val width = canvas.width
     val height = canvas.height
-    val size : Vector
-    get() = v(width, height)
-    val context = getContext()
+    val size: Vector
+        get() = v(width, height)
+    val context = canvas.getContext("2d")!!
     var valid = false
     val shapes = ArrayList<Shape>()
-    var selection : Shape? = null
+    var selection: Shape? = null
     var dragOff = Vector()
     val interval = 1000 / 50
 
@@ -48,28 +51,29 @@ class CanvasState(val canvas : Canvas) {
             unsetSelection()
         }
 
-        setInterval({
+        window.setInterval({
             draw()
         }, interval)
     }
 
-    fun mousePos(e : MouseEvent) : Vector {
+
+    fun mousePos(e: MouseEvent): Vector {
         var offset = Vector()
-        var element : DomElement? = canvas
+        var element: HTMLElement? = canvas
         while (element != null) {
-            val el : DomElement = element.sure()
+            val el: HTMLElement = element.sure()
             offset += Vector(el.offsetLeft, el.offsetTop)
             element = el.offsetParent
         }
         return Vector(e.pageX, e.pageY) - offset
     }
 
-    fun addShape(shape : Shape) {
+    fun addShape(shape: Shape) {
         shapes.add(shape)
         valid = false
     }
 
-    fun removeShape(shape : Shape) {
+    fun removeShape(shape: Shape) {
         shapes.remove(shape)
         valid = false
     }
@@ -105,4 +109,4 @@ class CanvasState(val canvas : Canvas) {
 }
 
 
-val canvasState = CanvasState(getCanvas())
+val canvasState = CanvasState(canvas)

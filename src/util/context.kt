@@ -1,9 +1,9 @@
 package util
 
 import example.Vector
-import html5.Context
+import js.dom.html5.CanvasContext
 
-fun Context.shadowed(shadowOffset : Vector, alpha : Double, render : Context.() -> Unit) {
+fun CanvasContext.shadowed(shadowOffset: Vector, alpha: Double, render: CanvasContext.() -> Unit) {
     save()
     shadowColor = "rgba(100, 100, 100, $alpha)"
     shadowBlur = 5.0
@@ -13,7 +13,7 @@ fun Context.shadowed(shadowOffset : Vector, alpha : Double, render : Context.() 
     restore()
 }
 
-fun Context.fillPath(constructPath : Context.() -> Unit) {
+fun CanvasContext.fillPath(constructPath: CanvasContext.() -> Unit) {
     beginPath()
     constructPath()
     closePath()
@@ -21,13 +21,13 @@ fun Context.fillPath(constructPath : Context.() -> Unit) {
 }
 
 
-fun Context.strokeLine(x1 : Int, y1 : Int, x2 : Int, y2 : Int) {
+fun CanvasContext.strokeLine(x1: Int, y1: Int, x2: Int, y2: Int) {
     beginPath()
     moveTo(x1, y1)
     lineTo(x2, y2)
     stroke()
 }
 
-fun Context.drawing(f : Context.()->Unit) {
+fun CanvasContext.drawing(f: CanvasContext.()->Unit) {
     f()
 }

@@ -1,33 +1,33 @@
 package example
 
-import html5.Context
 import java.util.ArrayList
 import java.util.List
+import js.dom.html5.CanvasContext
 import util.strokeLine
 
-class Piece(val i : Int, val j : Int,
-            startingPos : Vector,
-            val imageX : Int, val imageY : Int,
-            val width : Int, val height : Int) {
+class Piece(val i: Int, val j: Int,
+            startingPos: Vector,
+            val imageX: Int, val imageY: Int,
+            val width: Int, val height: Int) {
     val shadowOffset = v(- 4.0, 4.0)
 
-    var pos : Vector = startingPos
+    var pos: Vector = startingPos
         get() = if (bundle.selected) $pos else $pos + shadowOffset
 
-    var bundle : Bundle = Bundle(this)
+    var bundle: Bundle = Bundle(this)
 
-    val leftNeighbour : Piece?
+    val leftNeighbour: Piece?
         get() = if (i > 0) Image.pieces[i - 1][j] else null
-    val rightNeighbour : Piece?
+    val rightNeighbour: Piece?
         get() = if (i < Image.piecesX - 1) Image.pieces[i + 1][j] else null
-    val topNeighbour : Piece?
+    val topNeighbour: Piece?
         get() = if (j > 0) Image.pieces[i][j - 1] else null
-    val bottomNeighbour : Piece?
+    val bottomNeighbour: Piece?
         get() = if (j < Image.piecesY - 1) Image.pieces[i][j + 1] else null
 
-    fun contains(mousePos : Vector) : Boolean = mousePos.isInRect(pos, v(width.toDouble(), height.toDouble()))
+    fun contains(mousePos: Vector): Boolean = mousePos.isInRect(pos, v(width.toDouble(), height.toDouble()))
 
-    fun drawBorders(state : CanvasState) {
+    fun drawBorders(state: CanvasState) {
         val context = state.context
         context.drawBorder(leftNeighbour, true) {
             strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt(), pos.y.toInt() + height)
@@ -46,7 +46,7 @@ class Piece(val i : Int, val j : Int,
         }
     }
 
-    fun Context.setLineStyleFor(neighbour : Piece?, shadow : Boolean) {
+    fun CanvasContext.setLineStyleFor(neighbour: Piece?, shadow: Boolean) {
         if (neighbour?.bundle == bundle) {
             strokeStyle = "#FFFFFF"
             lineWidth = 2.0
@@ -62,7 +62,7 @@ class Piece(val i : Int, val j : Int,
         }
     }
 
-    fun Context.drawBorder(neighbour : Piece?, drawShadow : Boolean, drawLine : Context.() -> Unit) {
+    fun CanvasContext.drawBorder(neighbour: Piece?, drawShadow: Boolean, drawLine: CanvasContext.() -> Unit) {
         save()
         setLineStyleFor(neighbour, drawShadow)
         drawLine()
@@ -70,16 +70,16 @@ class Piece(val i : Int, val j : Int,
     }
 
 
-    fun drawImagePart(state : CanvasState) {
+    fun drawImagePart(state: CanvasState) {
         // state.context.shadowed(v(1.0, 1.0), 0.8) {
         state.context.drawImage(Image.data, imageX, imageY, width, height, pos.x.toInt(), pos.y.toInt(), width, height)
         // }
     }
 
-    val indexVector : Vector
+    val indexVector: Vector
         get() = v(i, j)
 
-    fun neighbours() : List<Piece?> {
+    fun neighbours(): List<Piece?> {
         val result = ArrayList<Piece?>()
         result.add(leftNeighbour)
         result.add(topNeighbour)
@@ -88,7 +88,7 @@ class Piece(val i : Int, val j : Int,
         return result
     }
 
-    fun alignDelta(otherPiece : Piece) : Vector {
+    fun alignDelta(otherPiece: Piece): Vector {
         val imageDistance = (otherPiece.indexVector - this.indexVector) * Image.pieceSize.toDouble()
         val realDistance = otherPiece.pos - this.$pos
         return realDistance - imageDistance
