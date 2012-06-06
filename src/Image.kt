@@ -1,8 +1,7 @@
 package example
 
 import java.util.ArrayList
-import js.dom.html.HTMLImageElement
-import js.dom.html.window
+import js.dom.html.*
 
 fun getImage(path: String): HTMLImageElement {
     val image = window.document.createElement("img") as HTMLImageElement
@@ -15,11 +14,13 @@ object Image {
         get() = getImage("Penguins.jpg")
     val width = 1024
     val height = 768
-    val piecesX = 8
-    val piecesY = 6
+    val piecesX = 4
+    val piecesY = 3
     val piecesList = ArrayList<Piece>()
     val pieceSize = width / piecesX
     val pieces: Array<Array<Piece>> = splitInPieces()
+    val piecesCount: Int
+        get() = piecesX * piecesY
 
 
     fun splitInPieces(): Array<Array<Piece>> {
@@ -57,3 +58,13 @@ class Shuffler(val x: Int, val y: Int) {
         return value
     }
 }
+
+
+var haveWon = false
+    set(won) {
+        if (won and !$haveWon) {
+            val canvasDiv = window.document.getElementById("logo")!! as HTMLDivElement
+            canvasDiv.innerHTML = "<p>Congratulations!<br/>Click on the logo!<br/>" + canvasDiv.innerHTML
+        }
+        $haveWon = won
+    }

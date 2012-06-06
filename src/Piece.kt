@@ -71,9 +71,7 @@ class Piece(val i: Int, val j: Int,
 
 
     fun drawImagePart(state: CanvasState) {
-        // state.context.shadowed(v(1.0, 1.0), 0.8) {
         state.context.drawImage(Image.data, imageX, imageY, width, height, pos.x.toInt(), pos.y.toInt(), width, height)
-        // }
     }
 
     val indexVector: Vector

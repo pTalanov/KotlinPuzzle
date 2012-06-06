@@ -2,8 +2,8 @@ package example
 
 import java.util.ArrayList
 
-class Bundle(val mainPiece : Piece) : Shape() {
-    override fun contains(mousePos : Vector) : Boolean {
+class Bundle(val mainPiece: Piece): Shape() {
+    override fun contains(mousePos: Vector): Boolean {
         for (piece in pieces) {
             if (piece.contains(mousePos)) {
                 return true
@@ -12,26 +12,26 @@ class Bundle(val mainPiece : Piece) : Shape() {
         return false
     }
 
-    override var pos : Vector
-    get() = mainPiece.pos
-    set(newPos) {
-        val delta = newPos - pos
-        for (piece in pieces) {
-            piece.pos += delta
-        }
-    }
-
-    override var selected : Boolean = false
-    set(newVal) {
-        $selected = newVal
-        if (!selected) {
+    override var pos: Vector
+        get() = mainPiece.pos
+        set(newPos) {
+            val delta = newPos - pos
             for (piece in pieces) {
-                mergeNeighbours(piece)
+                piece.pos += delta
             }
         }
-    }
 
-    fun mergeNeighbours(piece : Piece) {
+    override var selected: Boolean = false
+        set(newVal) {
+            $selected = newVal
+            if (!selected) {
+                for (piece in pieces) {
+                    mergeNeighbours(piece)
+                }
+            }
+        }
+
+    fun mergeNeighbours(piece: Piece) {
         for (neighbour in piece.neighbours()) {
             if (neighbour == null) {
                 continue
@@ -43,9 +43,10 @@ class Bundle(val mainPiece : Piece) : Shape() {
                 }
             }
         }
+        haveWon = pieces.size() == Image.piecesCount
     }
 
-    override fun draw(state : CanvasState) {
+    override fun draw(state: CanvasState) {
         for (piece in pieces) {
             piece.drawImagePart(state)
             piece.drawBorders(state)
@@ -57,7 +58,7 @@ class Bundle(val mainPiece : Piece) : Shape() {
         pieces.add(mainPiece)
     }
 
-    fun merge(otherBundle : Bundle, alignDelta : Vector) {
+    fun merge(otherBundle: Bundle, alignDelta: Vector) {
         for (piece in otherBundle.pieces) {
             pieces.add(piece)
             piece.bundle = this

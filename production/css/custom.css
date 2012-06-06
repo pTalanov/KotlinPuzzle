@@ -2,3 +2,11 @@ body {
     cursor:pointer;
     cursor:hand
 }
+
+#logo {
+   position:absolute;
+    bottom:0;
+    right:0;
+    font-family: Arial,Helvetica,FreeSans,sans-serif;
+    font-size:30px;
+}

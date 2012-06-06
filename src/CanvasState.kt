@@ -109,4 +109,14 @@ class CanvasState(val canvas: HTMLCanvasElement) {
 }
 
 
-val canvasState = CanvasState(canvas)
+//This ugly code won't be needed when we have lazy annotation
+val canvasState: CanvasState
+    get() {
+        if (_canvasState == null) {
+            _canvasState = CanvasState(canvas)
+        }
+        return _canvasState!!
+    }
+
+
+var _canvasState: CanvasState? = null
