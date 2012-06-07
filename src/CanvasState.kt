@@ -26,7 +26,7 @@ class CanvasState(val canvas: HTMLCanvasElement) {
     val interval = 1000 / 50
 
     {
-        jq(canvas).mousedown {
+        jq(canvas).mousedown { it ->
             unsetSelection()
             val mousePos = mousePos(it)
             for (shape in shapes.reversed()) {
@@ -40,9 +40,9 @@ class CanvasState(val canvas: HTMLCanvasElement) {
             }
         }
 
-        jq(canvas).mousemove {
+        jq(canvas).mousemove { it ->
             if (selection != null) {
-                selection.sure().pos = mousePos(it) - dragOff
+                selection!!.pos = mousePos(it) - dragOff
                 valid = false
             }
         }
@@ -61,7 +61,7 @@ class CanvasState(val canvas: HTMLCanvasElement) {
         var offset = Vector()
         var element: HTMLElement? = canvas
         while (element != null) {
-            val el: HTMLElement = element.sure()
+            val el: HTMLElement = element!!
             offset += Vector(el.offsetLeft, el.offsetTop)
             element = el.offsetParent
         }

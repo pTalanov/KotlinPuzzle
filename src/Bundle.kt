@@ -3,6 +3,7 @@ package example
 import java.util.ArrayList
 
 class Bundle(val mainPiece: Piece): Shape() {
+    // any()
     override fun contains(mousePos: Vector): Boolean {
         for (piece in pieces) {
             if (piece.contains(mousePos)) {
@@ -53,6 +54,7 @@ class Bundle(val mainPiece: Piece): Shape() {
         }
     }
 
+    // arrayList(mainPiece)
     val pieces = ArrayList<Piece>();
     {
         pieces.add(mainPiece)

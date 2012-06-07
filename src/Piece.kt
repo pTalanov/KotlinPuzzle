@@ -16,6 +16,7 @@ class Piece(val i: Int, val j: Int,
 
     var bundle: Bundle = Bundle(this)
 
+    // TODO
     val leftNeighbour: Piece?
         get() = if (i > 0) Image.pieces[i - 1][j] else null
     val rightNeighbour: Piece?
@@ -29,6 +30,16 @@ class Piece(val i: Int, val j: Int,
 
     fun drawBorders(state: CanvasState) {
         val context = state.context
+        //        val lt = pos
+        //        val lb = lt + h
+        //        val rt = lt + w
+        //        val rb = lb + w
+        //
+        //        drawLine(lt, lb)
+        //        drawLine(lt, rt)
+        //        drawLine(rb, rt)
+        //        drawLine(rb, lb)
+
         context.drawBorder(leftNeighbour, true) {
             strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt(), pos.y.toInt() + height)
         }
@@ -51,7 +62,7 @@ class Piece(val i: Int, val j: Int,
             strokeStyle = "#FFFFFF"
             lineWidth = 2.0
         } else {
-            if (shadow and (bundle == canvasState.selection)) {
+            if (shadow && (bundle == canvasState.selection)) {
                 shadowColor = "rgba(100, 100, 100, 0.9)"
                 shadowBlur = 4.0
                 shadowOffsetX = shadowOffset.x

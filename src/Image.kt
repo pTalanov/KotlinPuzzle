@@ -42,6 +42,7 @@ object Image {
 }
 
 class Shuffler(val x: Int, val y: Int) {
+    // Pair
     val all = ArrayList<#(Int, Int)>();
     {
         for (i in 0..x - 1) {
@@ -51,6 +52,7 @@ class Shuffler(val x: Int, val y: Int) {
         }
     }
 
+    // Pair
     fun getNextPair(): #(Int, Int) {
         val randomValue = Math.floor((all.size() - 1) * Math.random())
         val value = all[randomValue]
