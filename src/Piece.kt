@@ -66,7 +66,7 @@ class Piece(val i: Int, val j: Int,
 
 
     fun drawImagePart(state: CanvasState) {
-        state.context.drawImage(Image.data, imageX, imageY, width, height, pos.x.toInt(), pos.y.toInt(), width, height)
+        state.context.drawImage(PuzzleImage.data, imageX, imageY, width, height, pos.x.toInt(), pos.y.toInt(), width, height)
     }
 
     val indexVector: Vector
@@ -82,7 +82,7 @@ class Piece(val i: Int, val j: Int,
     }
 
     fun alignDelta(otherPiece: Piece): Vector {
-        val imageDistance = (otherPiece.indexVector - this.indexVector) * Image.pieceSize.toDouble()
+        val imageDistance = (otherPiece.indexVector - this.indexVector) * PuzzleImage.pieceSize.toDouble()
         val realDistance = otherPiece.pos - this.$pos
         return realDistance - imageDistance
     }

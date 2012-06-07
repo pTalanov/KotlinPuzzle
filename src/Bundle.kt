@@ -40,7 +40,7 @@ class Bundle(val mainPiece: Piece): Shape() {
                 }
             }
         }
-        haveWon = pieces.size() == Image.piecesCount
+        haveWon = pieces.size() == PuzzleImage.pieceCount
     }
 
     override fun draw(state: CanvasState) {

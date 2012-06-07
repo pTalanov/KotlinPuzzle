@@ -110,6 +110,7 @@ class CanvasState(val canvas: HTMLCanvasElement) {
 
 
 //This ugly code won't be needed when we have lazy annotation
+private var _canvasState: CanvasState? = null
 val canvasState: CanvasState
     get() {
         if (_canvasState == null) {
@@ -118,5 +119,3 @@ val canvasState: CanvasState
         return _canvasState!!
     }
 
-
-var _canvasState: CanvasState? = null

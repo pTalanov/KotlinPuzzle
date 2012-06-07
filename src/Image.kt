@@ -5,24 +5,23 @@ import js.dom.html.*
 import stdlib.Pair
 import stdlib.pair
 
-fun getImage(path: String): HTMLImageElement {
+fun loadImageFromResource(path: String): HTMLImageElement {
     val image = window.document.createElement("img") as HTMLImageElement
     image.src = path
     return image
 }
 
-object Image {
+object PuzzleImage {
     val data: HTMLImageElement
-        get() = getImage("Penguins.jpg")
-    val width = 1024
-    val height = 768
+        get() = loadImageFromResource("Penguins.jpg")
+    val width = 800
+    val height = 600
     val piecesX = 4
     val piecesY = 3
     val piecesList = ArrayList<Piece>()
     val pieceSize = width / piecesX
-    val pieces: Array<Array<Piece>> = splitInPieces()
-    val piecesCount: Int
-        get() = piecesX * piecesY
+    val pieceCount = piecesX * piecesY
+    val pieces = splitInPieces()
 
     fun get(i: Int, j: Int): Piece? {
         return if ((i in 0..piecesX - 1) && (j in 0..piecesY - 1)) {
@@ -35,15 +34,20 @@ object Image {
 
     fun splitInPieces(): Array<Array<Piece>> {
         val shuffler = Shuffler(piecesX, piecesY)
-        return  Array(piecesX) {
+        return Array(piecesX) {
         x ->
             Array(piecesY) {
             y ->
                 val xy = shuffler.getNextPair()
-                val imagePiece = Piece(i = x, j = y,
-                        imageX = x * pieceSize, imageY = y * pieceSize,
-                        width = pieceSize, height = pieceSize,
-                        startingPos = v(xy.first * pieceSize, xy.second * pieceSize))
+                val imagePiece = Piece(
+                        i = x,
+                        j = y,
+                        imageX = x * pieceSize,
+                        imageY = y * pieceSize,
+                        width = pieceSize,
+                        height = pieceSize,
+                        startingPos = v(xy._1 * pieceSize, xy._2 * pieceSize)
+                )
                 piecesList.add(imagePiece)
                 imagePiece
             }
@@ -73,9 +77,10 @@ class Shuffler(val x: Int, val y: Int) {
 
 var haveWon = false
     set(won) {
-        if (won and !$haveWon) {
-            val canvasDiv = window.document.getElementById("logo")!! as HTMLDivElement
-            canvasDiv.innerHTML = "<p>Congratulations!<br/>Click on the logo!<br/>" + canvasDiv.innerHTML
+        if (won && !$haveWon) {
+            val logo = window.document.getElementById("logoimage")!! as HTMLImageElement
+            logo.width = 250.0
+            logo.height = 250.0
         }
         $haveWon = won
     }
