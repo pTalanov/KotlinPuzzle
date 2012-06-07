@@ -20,8 +20,7 @@ class Vector(val x: Double = 0.0, val y: Double = 0.0) {
         return v(x * cos - y * sin, x * sin + y * cos)
     }
 
-    fun isInRect(topLeft: Vector, size: Vector) =
-    (x in topLeft.x..topLeft.x + size.x) && (y in topLeft.y..topLeft.y + size.y)
+    fun isInRect(topLeft: Vector, size: Vector) = (x in topLeft.x..topLeft.x + size.x) && (y in topLeft.y..topLeft.y + size.y)
 
     val sqr: Double
         get() = x * x + y * y

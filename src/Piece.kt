@@ -18,13 +18,13 @@ class Piece(val i: Int, val j: Int,
 
 
     val leftNeighbour: Piece?
-        get() = Image[i - 1, j]
+        get() = PuzzleImage[i - 1, j]
     val rightNeighbour: Piece?
-        get() = Image[i + 1, j]
+        get() = PuzzleImage[i + 1, j]
     val topNeighbour: Piece?
-        get() = Image[i, j - 1]
+        get() = PuzzleImage[i, j - 1]
     val bottomNeighbour: Piece?
-        get() = Image[i, j + 1]
+        get() = PuzzleImage[i, j + 1]
 
     fun contains(mousePos: Vector): Boolean = mousePos.isInRect(pos, v(width.toDouble(), height.toDouble()))
 

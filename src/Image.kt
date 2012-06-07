@@ -46,7 +46,7 @@ object PuzzleImage {
                         imageY = y * pieceSize,
                         width = pieceSize,
                         height = pieceSize,
-                        startingPos = v(xy._1 * pieceSize, xy._2 * pieceSize)
+                        startingPos = v(xy.first * pieceSize, xy.second * pieceSize)
                 )
                 piecesList.add(imagePiece)
                 imagePiece
