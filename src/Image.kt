@@ -67,8 +67,9 @@ class Shuffler(val x: Int, val y: Int) {
 var haveWon = false
     set(won) {
         if (won && !$haveWon) {
-            val canvasDiv = window.document.getElementById("logo")!! as HTMLDivElement
-            canvasDiv.innerHTML = "<p>Congratulations!<br/>Click on the logo!<br/>" + canvasDiv.innerHTML
+            val logo = window.document.getElementById("logoimage")!! as HTMLImageElement
+            logo.width = 250.0
+            logo.height = 250.0
         }
         $haveWon = won
     }
