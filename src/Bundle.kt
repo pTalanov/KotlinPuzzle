@@ -1,16 +1,12 @@
 package example
 
-import java.util.ArrayList
+import stdlib.any
+import stdlib.arrayList
 
 class Bundle(val mainPiece: Piece): Shape() {
-    // any()
+
     override fun contains(mousePos: Vector): Boolean {
-        for (piece in pieces) {
-            if (piece.contains(mousePos)) {
-                return true
-            }
-        }
-        return false
+        return pieces.any({ contains(mousePos) })
     }
 
     override var pos: Vector
@@ -54,11 +50,7 @@ class Bundle(val mainPiece: Piece): Shape() {
         }
     }
 
-    // arrayList(mainPiece)
-    val pieces = ArrayList<Piece>();
-    {
-        pieces.add(mainPiece)
-    }
+    val pieces = arrayList(mainPiece)
 
     fun merge(otherBundle: Bundle, alignDelta: Vector) {
         for (piece in otherBundle.pieces) {

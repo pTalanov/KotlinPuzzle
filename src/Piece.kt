@@ -16,45 +16,29 @@ class Piece(val i: Int, val j: Int,
 
     var bundle: Bundle = Bundle(this)
 
-    // TODO
+
     val leftNeighbour: Piece?
-        get() = if (i > 0) Image.pieces[i - 1][j] else null
+        get() = Image[i - 1, j]
     val rightNeighbour: Piece?
-        get() = if (i < Image.piecesX - 1) Image.pieces[i + 1][j] else null
+        get() = Image[i + 1, j]
     val topNeighbour: Piece?
-        get() = if (j > 0) Image.pieces[i][j - 1] else null
+        get() = Image[i, j - 1]
     val bottomNeighbour: Piece?
-        get() = if (j < Image.piecesY - 1) Image.pieces[i][j + 1] else null
+        get() = Image[i, j + 1]
 
     fun contains(mousePos: Vector): Boolean = mousePos.isInRect(pos, v(width.toDouble(), height.toDouble()))
 
     fun drawBorders(state: CanvasState) {
         val context = state.context
-        //        val lt = pos
-        //        val lb = lt + h
-        //        val rt = lt + w
-        //        val rb = lb + w
-        //
-        //        drawLine(lt, lb)
-        //        drawLine(lt, rt)
-        //        drawLine(rb, rt)
-        //        drawLine(rb, lb)
+        val leftTop = pos
+        val leftBottom = pos + v(0, height)
+        val rightTop = pos + v(width, 0)
+        val rightBottom = pos + v(width, height)
 
-        context.drawBorder(leftNeighbour, true) {
-            strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt(), pos.y.toInt() + height)
-        }
-
-        context.drawBorder(rightNeighbour, false) {
-            strokeLine(pos.x.toInt() + width, pos.y.toInt(), pos.x.toInt() + width, pos.y.toInt() + height)
-        }
-
-        context.drawBorder(bottomNeighbour, true) {
-            strokeLine(pos.x.toInt(), pos.y.toInt() + height, pos.x.toInt() + width, pos.y.toInt() + height)
-        }
-
-        context.drawBorder(topNeighbour, false) {
-            strokeLine(pos.x.toInt(), pos.y.toInt(), pos.x.toInt() + width, pos.y.toInt())
-        }
+        context.drawBorder(leftNeighbour, true, leftTop, leftBottom)
+        context.drawBorder(rightNeighbour, false, rightTop, rightBottom)
+        context.drawBorder(bottomNeighbour, true, leftBottom, rightBottom)
+        context.drawBorder(topNeighbour, false, leftTop, rightTop)
     }
 
     fun CanvasContext.setLineStyleFor(neighbour: Piece?, shadow: Boolean) {
@@ -73,10 +57,10 @@ class Piece(val i: Int, val j: Int,
         }
     }
 
-    fun CanvasContext.drawBorder(neighbour: Piece?, drawShadow: Boolean, drawLine: CanvasContext.() -> Unit) {
+    fun CanvasContext.drawBorder(neighbour: Piece?, drawShadow: Boolean, p1: Vector, p2: Vector) {
         save()
         setLineStyleFor(neighbour, drawShadow)
-        drawLine()
+        strokeLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
         restore()
     }
 

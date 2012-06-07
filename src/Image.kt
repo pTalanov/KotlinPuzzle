@@ -2,6 +2,8 @@ package example
 
 import java.util.ArrayList
 import js.dom.html.*
+import stdlib.Pair
+import stdlib.pair
 
 fun getImage(path: String): HTMLImageElement {
     val image = window.document.createElement("img") as HTMLImageElement
@@ -22,6 +24,14 @@ object Image {
     val piecesCount: Int
         get() = piecesX * piecesY
 
+    fun get(i: Int, j: Int): Piece? {
+        return if ((i in 0..piecesX - 1) && (j in 0..piecesY - 1)) {
+            pieces[i][j]
+        } else {
+            null
+        }
+    }
+
 
     fun splitInPieces(): Array<Array<Piece>> {
         val shuffler = Shuffler(piecesX, piecesY)
@@ -33,7 +43,7 @@ object Image {
                 val imagePiece = Piece(i = x, j = y,
                         imageX = x * pieceSize, imageY = y * pieceSize,
                         width = pieceSize, height = pieceSize,
-                        startingPos = v(xy._1 * pieceSize, xy._2 * pieceSize))
+                        startingPos = v(xy.first * pieceSize, xy.second * pieceSize))
                 piecesList.add(imagePiece)
                 imagePiece
             }
@@ -42,18 +52,17 @@ object Image {
 }
 
 class Shuffler(val x: Int, val y: Int) {
-    // Pair
-    val all = ArrayList<#(Int, Int)>();
+
+    val all = ArrayList<Pair<Int, Int>>();
     {
         for (i in 0..x - 1) {
             for (j in 0..y - 1) {
-                all.add(#(i, j))
+                all.add(pair(i, j))
             }
         }
     }
 
-    // Pair
-    fun getNextPair(): #(Int, Int) {
+    fun getNextPair(): Pair<Int, Int> {
         val randomValue = Math.floor((all.size() - 1) * Math.random())
         val value = all[randomValue]
         all.remove(value : Any?)
