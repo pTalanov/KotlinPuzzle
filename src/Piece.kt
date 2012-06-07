@@ -17,13 +17,13 @@ class Piece(val i: Int, val j: Int,
     var bundle: Bundle = Bundle(this)
 
     val leftNeighbour: Piece?
-        get() = if (i > 0) Image.pieces[i - 1][j] else null
+        get() = if (i > 0) PuzzleImage.pieces[i - 1][j] else null
     val rightNeighbour: Piece?
-        get() = if (i < Image.piecesX - 1) Image.pieces[i + 1][j] else null
+        get() = if (i < PuzzleImage.piecesX - 1) PuzzleImage.pieces[i + 1][j] else null
     val topNeighbour: Piece?
-        get() = if (j > 0) Image.pieces[i][j - 1] else null
+        get() = if (j > 0) PuzzleImage.pieces[i][j - 1] else null
     val bottomNeighbour: Piece?
-        get() = if (j < Image.piecesY - 1) Image.pieces[i][j + 1] else null
+        get() = if (j < PuzzleImage.piecesY - 1) PuzzleImage.pieces[i][j + 1] else null
 
     fun contains(mousePos: Vector): Boolean = mousePos.isInRect(pos, v(width.toDouble(), height.toDouble()))
 
@@ -71,7 +71,7 @@ class Piece(val i: Int, val j: Int,
 
 
     fun drawImagePart(state: CanvasState) {
-        state.context.drawImage(Image.data, imageX, imageY, width, height, pos.x.toInt(), pos.y.toInt(), width, height)
+        state.context.drawImage(PuzzleImage.data, imageX, imageY, width, height, pos.x.toInt(), pos.y.toInt(), width, height)
     }
 
     val indexVector: Vector
@@ -87,7 +87,7 @@ class Piece(val i: Int, val j: Int,
     }
 
     fun alignDelta(otherPiece: Piece): Vector {
-        val imageDistance = (otherPiece.indexVector - this.indexVector) * Image.pieceSize.toDouble()
+        val imageDistance = (otherPiece.indexVector - this.indexVector) * PuzzleImage.pieceSize.toDouble()
         val realDistance = otherPiece.pos - this.$pos
         return realDistance - imageDistance
     }
