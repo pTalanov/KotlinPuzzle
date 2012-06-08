@@ -1,65 +1,7 @@
 (function(){
   'use strict';
   var classes = function(){
-    var tmp$0 = Kotlin.createClass({initialize:function(x, y){
-      this.$x = x;
-      this.$y = y;
-    }
-    , get_x:function(){
-      return this.$x;
-    }
-    , get_y:function(){
-      return this.$y;
-    }
-    , plus:function(v){
-      {
-        return example.v(this.get_x() + v.get_x(), this.get_y() + v.get_y());
-      }
-    }
-    , minus:function(){
-      {
-        return example.v(-this.get_x(), -this.get_y());
-      }
-    }
-    , minus$0:function(v){
-      {
-        return example.v(this.get_x() - v.get_x(), this.get_y() - v.get_y());
-      }
-    }
-    , times:function(koef){
-      {
-        return example.v(this.get_x() * koef, this.get_y() * koef);
-      }
-    }
-    , distanceTo:function(v){
-      {
-        return Math.sqrt(this.minus$0(v).get_sqr());
-      }
-    }
-    , rotatedBy:function(theta){
-      {
-        var sin = Math.sin(theta);
-        var cos = Math.cos(theta);
-        return example.v(this.get_x() * cos - this.get_y() * sin, this.get_x() * sin + this.get_y() * cos);
-      }
-    }
-    , isInRect:function(topLeft, size){
-      {
-        return (new Kotlin.NumberRange(topLeft.get_x(), topLeft.get_x() + size.get_x() - topLeft.get_x() + 1, false)).contains(this.get_x()) && (new Kotlin.NumberRange(topLeft.get_y(), topLeft.get_y() + size.get_y() - topLeft.get_y() + 1, false)).contains(this.get_y());
-      }
-    }
-    , get_sqr:function(){
-      {
-        return this.get_x() * this.get_x() + this.get_y() * this.get_y();
-      }
-    }
-    , get_normalized:function(){
-      {
-        return this.times(1 / Math.sqrt(this.get_sqr()));
-      }
-    }
-    });
-    var tmp$1 = Kotlin.createClass({initialize:function(){
+    var tmp$0 = Kotlin.createClass({initialize:function(){
     }
     , draw:function(state){
     }
@@ -78,7 +20,7 @@
       this.$selected_0 = tmp$0;
     }
     });
-    var tmp$2 = Kotlin.createClass(tmp$1, {initialize:function(mainPiece){
+    var tmp$1 = Kotlin.createClass(tmp$0, {initialize:function(mainPiece){
       this.$mainPiece = mainPiece;
       this.super_init();
       this.$selected = false;
@@ -105,7 +47,7 @@
     }
     , set_pos:function(newPos){
       {
-        var delta = newPos.minus$0(this.get_pos());
+        var delta = newPos.minus(this.get_pos());
         var tmp$0;
         {
           tmp$0 = this.get_pieces().iterator();
@@ -189,7 +131,7 @@
             {
               this.get_pieces().add(piece);
               piece.set_bundle(this);
-              piece.set_pos(piece.get_pos().minus$0(alignDelta));
+              piece.set_pos(piece.get_pos().minus(alignDelta));
             }
           }
         }
@@ -197,7 +139,268 @@
       }
     }
     });
-    var tmp$3 = Kotlin.createClass({initialize:function(i, j, startingPos, imageX, imageY, width, height){
+    var tmp$2 = Kotlin.createClass({initialize:function(x, y){
+      this.$x = x;
+      this.$y = y;
+    }
+    , get_x:function(){
+      return this.$x;
+    }
+    , get_y:function(){
+      return this.$y;
+    }
+    , plus:function(v){
+      {
+        return example.v(this.get_x() + v.get_x(), this.get_y() + v.get_y());
+      }
+    }
+    , minus$0:function(){
+      {
+        return example.v(-this.get_x(), -this.get_y());
+      }
+    }
+    , minus:function(v){
+      {
+        return example.v(this.get_x() - v.get_x(), this.get_y() - v.get_y());
+      }
+    }
+    , times:function(koef){
+      {
+        return example.v(this.get_x() * koef, this.get_y() * koef);
+      }
+    }
+    , distanceTo:function(v){
+      {
+        return Math.sqrt(this.minus(v).get_sqr());
+      }
+    }
+    , rotatedBy:function(theta){
+      {
+        var sin = Math.sin(theta);
+        var cos = Math.cos(theta);
+        return example.v(this.get_x() * cos - this.get_y() * sin, this.get_x() * sin + this.get_y() * cos);
+      }
+    }
+    , isInRect:function(topLeft, size){
+      {
+        return (new Kotlin.NumberRange(topLeft.get_x(), topLeft.get_x() + size.get_x() - topLeft.get_x() + 1, false)).contains(this.get_x()) && (new Kotlin.NumberRange(topLeft.get_y(), topLeft.get_y() + size.get_y() - topLeft.get_y() + 1, false)).contains(this.get_y());
+      }
+    }
+    , get_sqr:function(){
+      {
+        return this.get_x() * this.get_x() + this.get_y() * this.get_y();
+      }
+    }
+    , get_normalized:function(){
+      {
+        return this.times(1 / Math.sqrt(this.get_sqr()));
+      }
+    }
+    });
+    var tmp$3 = Kotlin.createClass({initialize:function(x, y){
+      this.$x = x;
+      this.$y = y;
+      this.$all = new Kotlin.ArrayList;
+      {
+        var tmp$0;
+        {
+          tmp$0 = this.get_x() - 1 + 1;
+          for (var i = 0; i != tmp$0; ++i) {
+            var tmp$1;
+            {
+              tmp$1 = this.get_y() - 1 + 1;
+              for (var j = 0; j != tmp$1; ++j) {
+                this.get_all().add(stdlib.pair(i, j));
+              }
+            }
+          }
+        }
+      }
+    }
+    , get_x:function(){
+      return this.$x;
+    }
+    , get_y:function(){
+      return this.$y;
+    }
+    , get_all:function(){
+      return this.$all;
+    }
+    , getNextPair:function(){
+      {
+        var randomValue = Math.floor((this.get_all().size() - 1) * Math.random());
+        var value = this.get_all().get(randomValue);
+        this.get_all().remove(value);
+        return value;
+      }
+    }
+    });
+    var tmp$4 = Kotlin.createClass({initialize:function(canvas){
+      this.$canvas = canvas;
+      this.$width = this.get_canvas().width;
+      this.$height = this.get_canvas().height;
+      this.$context = this.get_canvas().getContext('2d') != null?this.get_canvas().getContext('2d'):Kotlin.throwNPE();
+      this.$valid = false;
+      this.$shapes = new Kotlin.ArrayList;
+      this.$selection = null;
+      this.$dragOff = new example.Vector(0, 0);
+      this.$interval = 1000 / 50;
+      {
+        var tmp$0_0;
+        $(this.get_canvas()).mousedown((tmp$0_0 = this , function(it){
+          {
+            tmp$0_0.unsetSelection();
+            var mousePos = tmp$0_0.mousePos_0(it);
+            var tmp$0;
+            {
+              tmp$0 = kotlin.ranges.reversed(tmp$0_0.get_shapes()).iterator();
+              while (tmp$0.get_hasNext()) {
+                var shape = tmp$0.next();
+                {
+                  if (shape.contains(mousePos)) {
+                    tmp$0_0.set_dragOff(mousePos.minus(shape.get_pos()));
+                    shape.set_selected(true);
+                    tmp$0_0.set_selection(shape);
+                    tmp$0_0.removeShape(shape);
+                    break;
+                  }
+                }
+              }
+            }
+          }
+        }
+        ));
+        var tmp$1;
+        $(this.get_canvas()).mousemove((tmp$1 = this , function(it){
+          {
+            if (tmp$1.get_selection() != null) {
+              (tmp$1.get_selection() != null?tmp$1.get_selection():Kotlin.throwNPE()).set_pos(tmp$1.mousePos_0(it).minus(tmp$1.get_dragOff()));
+              tmp$1.set_valid(false);
+            }
+          }
+        }
+        ));
+        var tmp$2;
+        $(this.get_canvas()).mouseup((tmp$2 = this , function(it){
+          {
+            tmp$2.unsetSelection();
+          }
+        }
+        ));
+        var tmp$3;
+        window.setInterval((tmp$3 = this , function(){
+          {
+            tmp$3.draw();
+          }
+        }
+        ), this.get_interval());
+      }
+    }
+    , get_canvas:function(){
+      return this.$canvas;
+    }
+    , get_width:function(){
+      return this.$width;
+    }
+    , get_height:function(){
+      return this.$height;
+    }
+    , get_size:function(){
+      {
+        return example.v(this.get_width(), this.get_height());
+      }
+    }
+    , get_context:function(){
+      return this.$context;
+    }
+    , get_valid:function(){
+      return this.$valid;
+    }
+    , set_valid:function(tmp$0){
+      this.$valid = tmp$0;
+    }
+    , get_shapes:function(){
+      return this.$shapes;
+    }
+    , get_selection:function(){
+      return this.$selection;
+    }
+    , set_selection:function(tmp$0){
+      this.$selection = tmp$0;
+    }
+    , get_dragOff:function(){
+      return this.$dragOff;
+    }
+    , set_dragOff:function(tmp$0){
+      this.$dragOff = tmp$0;
+    }
+    , get_interval:function(){
+      return this.$interval;
+    }
+    , mousePos_0:function(e){
+      {
+        var offset = new example.Vector(0, 0);
+        var element = this.get_canvas();
+        while (element != null) {
+          var el = element != null?element:Kotlin.throwNPE();
+          offset = offset.plus(new example.Vector(el.offsetLeft, el.offsetTop));
+          element = el.offsetParent;
+        }
+        return (new example.Vector(e.pageX, e.pageY)).minus(offset);
+      }
+    }
+    , addShape:function(shape){
+      {
+        this.get_shapes().add(shape);
+        this.set_valid(false);
+      }
+    }
+    , removeShape:function(shape){
+      {
+        this.get_shapes().remove(shape);
+        this.set_valid(false);
+      }
+    }
+    , unsetSelection:function(){
+      {
+        var sel = this.get_selection();
+        if (sel != null) {
+          sel.set_selected(false);
+          this.addShape(sel);
+        }
+        this.set_selection(null);
+        this.set_valid(false);
+      }
+    }
+    , clear:function(){
+      {
+        var white = '#FFFFFF';
+        this.get_context().fillStyle = white;
+        this.get_context().fillRect(0, 0, this.get_width(), this.get_height());
+      }
+    }
+    , draw:function(){
+      {
+        if (this.get_valid())
+          return;
+        this.clear();
+        var tmp$0;
+        {
+          tmp$0 = this.get_shapes().iterator();
+          while (tmp$0.get_hasNext()) {
+            var shape = tmp$0.next();
+            {
+              shape.draw(this);
+            }
+          }
+        }
+        var tmp$1;
+        tmp$1 = this.get_selection() , tmp$1 != null?tmp$1.draw(this):null;
+        this.set_valid(true);
+      }
+    }
+    });
+    var tmp$5 = Kotlin.createClass({initialize:function(i, j, startingPos, imageX, imageY, width, height){
       this.$i = i;
       this.$j = j;
       this.$imageX = imageX;
@@ -335,214 +538,9 @@
     }
     , alignDelta:function(otherPiece){
       {
-        var imageDistance = otherPiece.get_indexVector().minus$0(this.get_indexVector()).times(example.get_PuzzleImage().get_pieceSize());
-        var realDistance = otherPiece.get_pos().minus$0(this.$pos);
-        return realDistance.minus$0(imageDistance);
-      }
-    }
-    });
-    var tmp$4 = Kotlin.createClass({initialize:function(x, y){
-      this.$x = x;
-      this.$y = y;
-      this.$all = new Kotlin.ArrayList;
-      {
-        var tmp$0;
-        {
-          tmp$0 = this.get_x() - 1 + 1;
-          for (var i = 0; i != tmp$0; ++i) {
-            var tmp$1;
-            {
-              tmp$1 = this.get_y() - 1 + 1;
-              for (var j = 0; j != tmp$1; ++j) {
-                this.get_all().add(stdlib.pair(i, j));
-              }
-            }
-          }
-        }
-      }
-    }
-    , get_x:function(){
-      return this.$x;
-    }
-    , get_y:function(){
-      return this.$y;
-    }
-    , get_all:function(){
-      return this.$all;
-    }
-    , getNextPair:function(){
-      {
-        var randomValue = Math.floor((this.get_all().size() - 1) * Math.random());
-        var value = this.get_all().get(randomValue);
-        this.get_all().remove(value);
-        return value;
-      }
-    }
-    });
-    var tmp$5 = Kotlin.createClass({initialize:function(canvas){
-      this.$canvas = canvas;
-      this.$width = this.get_canvas().width;
-      this.$height = this.get_canvas().height;
-      this.$context = this.get_canvas().getContext('2d') != null?this.get_canvas().getContext('2d'):Kotlin.throwNPE();
-      this.$valid = false;
-      this.$shapes = new Kotlin.ArrayList;
-      this.$selection = null;
-      this.$dragOff = new example.Vector(0, 0);
-      this.$interval = 1000 / 50;
-      {
-        var tmp$0_0;
-        $(this.get_canvas()).mousedown((tmp$0_0 = this , function(it){
-          {
-            tmp$0_0.unsetSelection();
-            var mousePos = tmp$0_0.mousePos_0(it);
-            var tmp$0;
-            {
-              tmp$0 = kotlin.ranges.reversed(tmp$0_0.get_shapes()).iterator();
-              while (tmp$0.get_hasNext()) {
-                var shape = tmp$0.next();
-                {
-                  if (shape.contains(mousePos)) {
-                    tmp$0_0.set_dragOff(mousePos.minus$0(shape.get_pos()));
-                    shape.set_selected(true);
-                    tmp$0_0.set_selection(shape);
-                    tmp$0_0.removeShape(shape);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-        ));
-        var tmp$1;
-        $(this.get_canvas()).mousemove((tmp$1 = this , function(it){
-          {
-            if (tmp$1.get_selection() != null) {
-              (tmp$1.get_selection() != null?tmp$1.get_selection():Kotlin.throwNPE()).set_pos(tmp$1.mousePos_0(it).minus$0(tmp$1.get_dragOff()));
-              tmp$1.set_valid(false);
-            }
-          }
-        }
-        ));
-        var tmp$2;
-        $(this.get_canvas()).mouseup((tmp$2 = this , function(it){
-          {
-            tmp$2.unsetSelection();
-          }
-        }
-        ));
-        var tmp$3;
-        window.setInterval((tmp$3 = this , function(){
-          {
-            tmp$3.draw();
-          }
-        }
-        ), this.get_interval());
-      }
-    }
-    , get_canvas:function(){
-      return this.$canvas;
-    }
-    , get_width:function(){
-      return this.$width;
-    }
-    , get_height:function(){
-      return this.$height;
-    }
-    , get_size:function(){
-      {
-        return example.v(this.get_width(), this.get_height());
-      }
-    }
-    , get_context:function(){
-      return this.$context;
-    }
-    , get_valid:function(){
-      return this.$valid;
-    }
-    , set_valid:function(tmp$0){
-      this.$valid = tmp$0;
-    }
-    , get_shapes:function(){
-      return this.$shapes;
-    }
-    , get_selection:function(){
-      return this.$selection;
-    }
-    , set_selection:function(tmp$0){
-      this.$selection = tmp$0;
-    }
-    , get_dragOff:function(){
-      return this.$dragOff;
-    }
-    , set_dragOff:function(tmp$0){
-      this.$dragOff = tmp$0;
-    }
-    , get_interval:function(){
-      return this.$interval;
-    }
-    , mousePos_0:function(e){
-      {
-        var offset = new example.Vector(0, 0);
-        var element = this.get_canvas();
-        while (element != null) {
-          var el = element != null?element:Kotlin.throwNPE();
-          offset = offset.plus(new example.Vector(el.offsetLeft, el.offsetTop));
-          element = el.offsetParent;
-        }
-        return (new example.Vector(e.pageX, e.pageY)).minus$0(offset);
-      }
-    }
-    , addShape:function(shape){
-      {
-        this.get_shapes().add(shape);
-        this.set_valid(false);
-      }
-    }
-    , removeShape:function(shape){
-      {
-        this.get_shapes().remove(shape);
-        this.set_valid(false);
-      }
-    }
-    , unsetSelection:function(){
-      {
-        var sel = this.get_selection();
-        if (sel != null) {
-          sel.set_selected(false);
-          this.addShape(sel);
-        }
-        this.set_selection(null);
-        this.set_valid(false);
-      }
-    }
-    , clear:function(){
-      {
-        this.get_context().fillStyle = '#FFFFFF';
-        this.get_context().fillRect(0, 0, this.get_width(), this.get_height());
-        this.get_context().strokeStyle = '#000000';
-        this.get_context().lineWidth = 4;
-        this.get_context().strokeRect(0, 0, this.get_width(), this.get_height());
-      }
-    }
-    , draw:function(){
-      {
-        if (this.get_valid())
-          return;
-        this.clear();
-        var tmp$0;
-        {
-          tmp$0 = this.get_shapes().iterator();
-          while (tmp$0.get_hasNext()) {
-            var shape = tmp$0.next();
-            {
-              shape.draw(this);
-            }
-          }
-        }
-        var tmp$1;
-        tmp$1 = this.get_selection() , tmp$1 != null?tmp$1.draw(this):null;
-        this.set_valid(true);
+        var imageDistance = otherPiece.get_indexVector().minus(this.get_indexVector()).times(example.get_PuzzleImage().get_pieceSize());
+        var realDistance = otherPiece.get_pos().minus(this.$pos);
+        return realDistance.minus(imageDistance);
       }
     }
     });
@@ -557,7 +555,7 @@
       return this.$second;
     }
     });
-    return {CanvasState:tmp$5, Pair:tmp$6, Shape:tmp$1, Bundle:tmp$2, Piece:tmp$3, Shuffler:tmp$4, Vector:tmp$0};
+    return {Piece:tmp$5, Pair:tmp$6, Bundle:tmp$1, Vector:tmp$2, Shuffler:tmp$3, CanvasState:tmp$4, Shape:tmp$0};
   }
   ();
   var util = Kotlin.createNamespace({initialize:function(){
@@ -580,29 +578,6 @@
   }
   }, {});
   Kotlin.defs.util = util;
-  var kotlin = Kotlin.createNamespace({initialize:function(){
-  }
-  , set:function(receiver, key, value){
-    {
-      return receiver.put(key, value);
-    }
-  }
-  }, {ranges:Kotlin.createNamespace({initialize:function(){
-  }
-  , reversed:function(receiver){
-    {
-      var result = new Kotlin.ArrayList;
-      var i = receiver.size();
-      while (i > 0) {
-        result.add(receiver.get(--i));
-      }
-      return result;
-    }
-  }
-  }, {}), browser:Kotlin.createNamespace({initialize:function(){
-  }
-  }, {})});
-  Kotlin.defs.kotlin = kotlin;
   var stdlib = Kotlin.createNamespace({initialize:function(){
   }
   , pair:function(first, second){
@@ -712,7 +687,8 @@
                 return function(y){
                   {
                     var xy = shuffler.getNextPair();
-                    var imagePiece = new example.Piece(x, y, example.v$0(xy.get_first() * tmp$0.get_pieceSize(), xy.get_second() * tmp$0.get_pieceSize()), x * tmp$0.get_pieceSize(), y * tmp$0.get_pieceSize(), tmp$0.get_pieceSize(), tmp$0.get_pieceSize());
+                    var startingOffset = 50;
+                    var imagePiece = new example.Piece(x, y, example.v$0(startingOffset + xy.get_first() * tmp$0.get_pieceSize(), startingOffset + xy.get_second() * tmp$0.get_pieceSize()), x * tmp$0.get_pieceSize(), y * tmp$0.get_pieceSize(), tmp$0.get_pieceSize(), tmp$0.get_pieceSize());
                     tmp$0.get_piecesList().add(imagePiece);
                     return imagePiece;
                   }
@@ -749,32 +725,6 @@
       return example.get__canvasState() != null?example.get__canvasState():Kotlin.throwNPE();
     }
   }
-  , main:function(args){
-    {
-      $(function(){
-        {
-          var pieces = example.get_PuzzleImage().get_piecesList();
-          var tmp$0;
-          {
-            tmp$0 = pieces.iterator();
-            while (tmp$0.get_hasNext()) {
-              var piece = tmp$0.next();
-              {
-                example.get_canvasState().addShape(piece.get_bundle());
-              }
-            }
-          }
-          window.setInterval(function(){
-            {
-              example.get_canvasState().set_valid(false);
-            }
-          }
-          , 1000);
-        }
-      }
-      );
-    }
-  }
   , loadImageFromResource:function(path){
     {
       var image = window.document.createElement('img');
@@ -808,13 +758,62 @@
       return new example.Vector(x, y);
     }
   }
-  }, {CanvasState:classes.CanvasState, Bundle:classes.Bundle, Shuffler:classes.Shuffler, Piece:classes.Piece, Shape:classes.Shape, Vector:classes.Vector});
+  , main:function(args){
+    {
+      $(function(){
+        {
+          var pieces = example.get_PuzzleImage().get_piecesList();
+          var tmp$0;
+          {
+            tmp$0 = pieces.iterator();
+            while (tmp$0.get_hasNext()) {
+              var piece = tmp$0.next();
+              {
+                example.get_canvasState().addShape(piece.get_bundle());
+              }
+            }
+          }
+          window.setInterval(function(){
+            {
+              example.get_canvasState().set_valid(false);
+            }
+          }
+          , 1000);
+        }
+      }
+      );
+    }
+  }
+  }, {Piece:classes.Piece, CanvasState:classes.CanvasState, Bundle:classes.Bundle, Shuffler:classes.Shuffler, Vector:classes.Vector, Shape:classes.Shape});
   Kotlin.defs.example = example;
+  var kotlin = Kotlin.createNamespace({initialize:function(){
+  }
+  , set:function(receiver, key, value){
+    {
+      return receiver.put(key, value);
+    }
+  }
+  }, {ranges:Kotlin.createNamespace({initialize:function(){
+  }
+  , reversed:function(receiver){
+    {
+      var result = new Kotlin.ArrayList;
+      var i = receiver.size();
+      while (i > 0) {
+        result.add(receiver.get(--i));
+      }
+      return result;
+    }
+  }
+  }, {}), browser:Kotlin.createNamespace({initialize:function(){
+  }
+  }, {})});
+  Kotlin.defs.kotlin = kotlin;
   util.initialize();
-  kotlin.ranges.initialize();
-  kotlin.initialize();
   stdlib.initialize();
   example.initialize();
+  kotlin.initialize();
+  kotlin.ranges.initialize();
 }
 )();
 
