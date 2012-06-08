@@ -39,6 +39,7 @@ object PuzzleImage {
             Array(piecesY) {
             y ->
                 val xy = shuffler.getNextPair()
+                val startingOffset = 50
                 val imagePiece = Piece(
                         i = x,
                         j = y,
@@ -46,7 +47,7 @@ object PuzzleImage {
                         imageY = y * pieceSize,
                         width = pieceSize,
                         height = pieceSize,
-                        startingPos = v(xy.first * pieceSize, xy.second * pieceSize)
+                        startingPos = v(startingOffset + xy.first * pieceSize, startingOffset + xy.second * pieceSize)
                 )
                 piecesList.add(imagePiece)
                 imagePiece

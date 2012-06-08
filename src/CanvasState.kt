@@ -89,11 +89,9 @@ class CanvasState(val canvas: HTMLCanvasElement) {
     }
 
     fun clear() {
-        context.fillStyle = "#FFFFFF"
+        val white = "#FFFFFF"
+        context.fillStyle = white
         context.fillRect(0, 0, width, height)
-        context.strokeStyle = "#000000"
-        context.lineWidth = 4.0
-        context.strokeRect(0, 0, width, height)
     }
 
     fun draw() {
