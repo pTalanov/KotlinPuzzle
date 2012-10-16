@@ -1,7 +1,6 @@
 package example
 
 import java.util.ArrayList
-import java.util.List
 import js.dom.html5.CanvasContext
 import util.strokeLine
 
